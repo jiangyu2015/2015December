@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>zyupload基本功能上传实例</title>
+    <meta charset="utf-8">
+    <title>票面上传-副本</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- 插件 -->
+    <link rel="stylesheet" href="../css/zyupload-1.0.0.min.css" type="text/css">
+    <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../js/zyupload/zyupload.basic-1.0.0.min.js"></script>
+    <style>
 
-    <script type="text/javascript" src="jquery-1.7.2.js"></script>
-    <link rel="stylesheet" href="zyupload/skins/zyupload-1.0.0.min.css " type="text/css">
-    <script type="text/javascript" src="zyupload/zyupload.basic-1.0.0.min.js"></script>
+    </style>
 </head>
 <body>
-<div id="zyupload" class="zyupload"></div>
-<div class="mask-pic">
-    <img src="" id="mask-pic" style="min-width:200px;min-height:200px"/>
-</div>
-<script type="text/javascript">
-    $('#zyupload').delegate('.upload_append_list', 'click', function () {
-        console.log(1);
-    });
-    $(function () {
-        $(".upload_preview img").click(function () {
-            alert($(this).src);
+<div class="wrap bg_gray">
+    <div class="header">
+        <a href="javascript:void(0);" class="goTo"></a>
+        <span>票面上传-副本</span>
+    </div>
+    <div class="main">
+        <div id="mask-pic" style="display: none;">
+            <img src="../images/index-icon_06.png"/><span></span>
+            <button class="swiple-btn">显示下一张</button>
+            <div class="mask-bg"></div>
+        </div>
 
-            $("#mask-pic").attr('src', $(this).src());
-        });
+        <form action="">
+            <div id="zyupload" class="zyupload"></div>
+            <div class="submitBtn">
+                <input type="submit" value="提交"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
         // 初始化插件
         $("#zyupload").zyUpload({
             width: "650px",                 // 宽度
@@ -65,15 +83,26 @@
             }
         });
 
+        var $currentImg = null;
+        $(".swiple-btn").click(function () {//显示下一张原图
+            var $nextImg = $currentImg.closest('.upload_append_list').next('.upload_append_list').find('img');
+            if ($nextImg.length != 0) {
+                $("#mask-pic img").attr('src', $nextImg.attr('src'));
+            }
+        });
+        $("#zyupload").delegate(".upload_append_list img", "click", function () {
+            $currentImg = $(this);
+            $("#mask-pic img").attr('src', $(this).attr('src'));
+            $("#mask-pic").css("display", "table-cell");//显示原图
+
+            $(".mask-bg").click(function () {
+                $("#mask-pic").css("display", "none");//关闭显示原图
+            });
+        });
+        $(".upload_btn").after('<a href="" class="help-link">请同事帮我</a>');
+
     });
 
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
