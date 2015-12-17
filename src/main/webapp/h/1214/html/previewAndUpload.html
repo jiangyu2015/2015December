@@ -86,6 +86,7 @@
         var $currentImg = null;
         $(".swiple-btn").click(function () {//显示下一张原图
             var $nextImg = $currentImg.closest('.upload_append_list').next('.upload_append_list').find('img');
+            $currentImg = $nextImg;
             if ($nextImg.length != 0) {
                 $("#mask-pic img").attr('src', $nextImg.attr('src'));
             }
