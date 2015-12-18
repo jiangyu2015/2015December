@@ -1,0 +1,879 @@
+@charset 'utf-8';
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	font-family: xifont;
+	src: url("http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page01/HelveticaNeueLTPro-UltLtEx.otf");
+}
+
+/*common*/
+.btn_dialogue{
+	-webkit-animation: flashing 1.2s infinite;
+	animation: flashing 1.2s infinite;
+}
+/*mask*/
+.mask{
+	display: none;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: #000;
+	opacity: 0.7;
+	z-index: 998;
+}
+/*紅包*/
+#packet1, #packet2{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 999;
+	
+	-webkit-transform: scale(1);
+	-webkit-animation-name: popin;
+	-webkit-animation-duration: 200ms;
+	-webkit-animation-fill-mode: both;
+	transform: scale(1);
+	animation-name: popin;
+	animation-duration: 200ms;
+    animation-fill-mode: both;
+    opacity: 1;
+}
+#packet1 .openBtn{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 475px;
+	height: 664px;
+	margin: auto;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/openBg.png) no-repeat;
+}
+#packet1 .openBtn .guide{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	left: 0;
+	right: 0;
+	bottom: 106px;
+	margin: auto;
+	border-radius: 75px;
+}
+#packet1 .closeBtn{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 475px;
+	height: 664px;
+	margin: auto;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/closeBg.png) no-repeat;
+}
+#packet1 .closeBtn .guide{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: -4px;
+	right: -4px;
+	margin: auto;
+	-webkit-animation: flashing 1.2s infinite;
+	animation: flashing 1.2s infinite;
+}
+#packet1 .closeBtn .guide img{
+	width: 100px;
+}
+#packet2 .openBtn{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 475px;
+	height: 664px;
+	margin: auto;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/openBg.png) no-repeat;
+}
+#packet2 .openBtn .guide{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	left: 0;
+	right: 0;
+	bottom: 106px;
+	margin: auto;
+	border-radius: 75px;
+}
+#packet2 .isLiu{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 475px;
+	height: 664px;
+	margin: auto;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/isLiu.png) no-repeat;
+}
+#packet2 .isLiu .input{
+	width: 340px;
+	height: 64px;
+	border-radius: 5px;
+	position: absolute;
+	margin: auto;
+	bottom: 170px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	font-size: 28px;
+}
+::-webkit-input-placeholder {
+	text-align: center;
+    color: #bebebe;
+    font-size: 26px;
+}
+#packet2 .isLiu a{
+	width: 340px;
+	height: 64px;
+	line-height: 64px;
+	border-radius: 5px;
+	position: absolute;
+	margin: auto;
+	bottom: 90px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	display: block;
+	background-color: #ffb22e;
+	font-size: 28px;
+	color: #fff;
+}
+#packet2 .isLiu .notDB{
+	background-color: #e4e4e4;
+}
+#packet2 .isNotLiu{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 475px;
+	height: 664px;
+	margin: auto;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/isNotLiu.png) no-repeat;
+}
+#packet2 .isNotLiu .guide{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	left: 0;
+	right: 0;
+	bottom: 106px;
+	margin: auto;
+	border-radius: 75px;
+}
+#packet2 .openPacket{
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	width: 475px;
+	height: 664px;
+	margin: auto;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/openPacket_bg.png) no-repeat;
+}
+#packet2 .openPacket .openPacket1{
+	position: absolute;
+	bottom: 203px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+#packet2 .openPacket .openPacket2{
+	position: absolute;
+	bottom: 128px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+#packet2 .openPacket .openPacket3{
+	position: absolute;
+	bottom: 52px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+
+/*loading*/
+#reload{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background-color: #fff;
+	display: none;
+}
+#reload .text{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 92px;
+	height: 107px;
+	text-align: center;
+	visibility: hidden;
+}
+#reload .text:before{
+	content: "";
+	position: absolute;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/loading.png) no-repeat;
+	width: 92px;
+	height: 84px;
+	visibility: visible;
+	top: 0;
+	left: 0;
+	transform-origin: 47.6px 41.3px;
+	-webkit-transform-origin: 47.6px 41.3px;
+	animation: spin 1s steps(6) infinite;
+	-webkit-animation: spin 1s steps(6) infinite;
+}
+@-webkit-keyframes spin {
+     0% { -webkit-transform: rotate(0deg); }
+   100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+     0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#reload .text:after{
+	content: "loading";
+	position: absolute;
+	visibility: visible;
+	left: 0;
+	right: 0;
+	bottom: 6px;
+	color: #bfbfbf;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+/*page1*/
+#page1{
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page01/home_bg.jpg) no-repeat center;
+	display: none;
+}
+/*homepage*/
+.homePage{
+	width: 100%;
+	height: 100%;
+	/* background-color: #000; */
+	display: none;
+}
+.homePage .content{
+	width: 100%;
+	height: 100%;
+	display: none;
+	
+	position: relative;
+}
+/*补充*/
+.homePage.active{
+	-webkit-transform: translate3d(0,0,0);
+	-webkit-animation-name: slideinfromright;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 550ms;
+	-webkit-animation-fill-mode: both;
+	transform: translateX(0);
+	animation-name: slideinfromright;
+	animation-timing-function: ease-out;
+	animation-duration: 550ms;
+	animation-fill-mode: both;
+}
+@-webkit-keyframes slideinfromright {
+    from { -webkit-transform: translate3d(0,0,0); }
+    to { -webkit-transform: translate3d(100%,0,0); }
+}
+@keyframes slideinfromright {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
+/*补充*/
+
+.homePage .content .datatime{
+	text-align: center;
+	padding-top: 28px;
+}
+.homePage .content p{
+	color: #fff;
+}
+.homePage .content .time{
+	font-size: 130px;
+	font-family: serif;
+	font-family: xifont;
+}
+.homePage .content .date{
+	font-size: 36px;
+}
+.homePage .content .msg{
+	margin-top: 50px;
+}
+.homePage .content .lock{
+	position: absolute;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+.homePage .content .lock .animateLock p{
+	 background-image: -webkit-linear-gradient(left, #FFFFFF, #000000 25%, #FFFFFF 50%, #000000 75%, #FFFFFF);
+     -webkit-text-fill-color: transparent;
+     -webkit-background-clip: text;
+     -webkit-background-size: 200% 100%;
+     -webkit-animation: masked-animation 2s infinite linear;
+     font-size: 40px;
+     display: inline;
+     color: #000;
+     /* position: relative; */
+     font-family: serif,sans-serif;
+}
+@-webkit-keyframes masked-animation {
+    0%  { background-position: 0 0;}
+	100% { background-position: -100% 0;}
+}
+
+
+/*page2*/
+#page2{
+	display: none;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page02/bg2.jpg) no-repeat center;
+}
+#page2 .btn{
+	position: absolute;
+	right: 16px;
+	top: 286px;
+}
+#page2 .btn img{
+	display: block;
+	width: 100%;
+}
+#page2 .btn .guide{
+	position: absolute;
+	top: -16px;
+	left: 0;
+	-webkit-animation: flashing 1.2s infinite;
+	animation: flashing 1.2s infinite;
+}
+
+/*page3*/
+#page3{
+	display: none;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page03/bg03.jpg) no-repeat center;
+	
+	-webkit-transform: scale(1);
+	-webkit-animation-name: popin;
+	-webkit-animation-duration: 350ms;
+	-webkit-animation-fill-mode: both;
+	transform: scale(1);
+	animation-name: popin;
+	animation-duration: 350ms;
+    animation-fill-mode: both;
+    opacity: 1;
+}
+@-webkit-keyframes popin {
+    from {
+        -webkit-transform: scale(.8);
+        opacity: 0;
+    }
+    to {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes popin {
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#page3 .dialogue_box{
+	position: absolute;
+	top: 78px;
+}
+#page3 .dialogue_box img{
+	display: block;
+	width: 100%;
+}
+#page3 .dialogue_box .guide{
+	position: absolute;
+	top: 2px;
+	left: 288px;
+	-webkit-animation: flashing 1.2s infinite;
+	animation: flashing 1.2s infinite;
+}
+
+/*page4*/
+#page4{
+	display: none;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/bg.jpg) no-repeat center;
+	
+	-webkit-transform: scale(1);
+	-webkit-animation-name: popin;
+	-webkit-animation-duration: 350ms;
+	-webkit-animation-fill-mode: both;
+	transform: scale(1);
+	animation-name: popin;
+	animation-duration: 350ms;
+    animation-fill-mode: both;
+    opacity: 1;
+    position: fixed;
+	top: 0;bottom: 0;
+	right: 0;left: 0;
+}
+#page4 .dialogue{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+/*animate*/
+#page4 .dialogue .dialogue_animate .animateImg{
+	padding: 20px;
+	display: none;
+	position: relative;
+}
+#page4 .dialogue .dialogue_animate .animateImg:first-child{
+	display: block;
+	text-align: center;
+}
+#page4 .dialogue .dialogue_animate .animateImg:first-child img{
+	display: inline;
+}
+#page4 .dialogue .dialogue_animate .animateImg img{
+	display: block;
+}
+#page4 .dialogue .dialogue_animate .animateImg.user{
+	text-align: right;
+}
+#page4 .dialogue .dialogue_animate .animateImg .headIcon{
+	position: absolute;
+	width: 74px;
+	height: 74px;
+	top: 20px;
+	right: 20px;
+}
+#page4 .dialogue .dialogue_animate .animateImg .headIcon img{
+	width: 74px;
+	height: 74px;
+	display: block;
+}
+
+
+.dialogue_move{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+}
+/*animate*/
+#page4 .dialogue .dialogue_scroll{
+	display: none;
+}
+#page4 .dialogue .dialogue_scroll .animateImg{
+	padding: 20px;
+	position: relative;
+}
+#page4 .dialogue .dialogue_scroll .animateImg.que1_01,
+#page4 .dialogue .dialogue_scroll .animateImg.que1_02,
+#page4 .dialogue .dialogue_scroll .animateImg.ans1_01,
+#page4 .dialogue .dialogue_scroll .animateImg.ans1_02,
+#page4 .dialogue .dialogue_scroll .animateImg.que2_01,
+#page4 .dialogue .dialogue_scroll .animateImg.que2_02,
+#page4 .dialogue .dialogue_scroll .animateImg.ans2_01,
+#page4 .dialogue .dialogue_scroll .animateImg.ans2_02,
+#page4 .dialogue .dialogue_scroll .animateImg.que3_01,
+#page4 .dialogue .dialogue_scroll .animateImg.que3_02,
+#page4 .dialogue .dialogue_scroll .animateImg.ans3_01,
+#page4 .dialogue .dialogue_scroll .animateImg.ans3_02{
+	display: none;
+}
+/* #page4 .dialogue .dialogue_scroll .animateImg:nth-child(even){
+	text-align: right;
+} */
+#page4 .dialogue .dialogue_scroll .animateImg.hint{
+	text-align: center;
+}
+#page4 .dialogue .dialogue_scroll .animateImg.hint img{
+	display: inline;
+}
+#page4 .dialogue .dialogue_scroll .animateImg.user{
+	text-align: right;
+}
+#page4 .dialogue .dialogue_scroll .animateImg.user img{
+	display: inline;
+}
+#page4 .dialogue .dialogue_scroll .animateImg img{
+	display: block;
+}
+#page4 .dialogue .dialogue_scroll .animateImg .headIcon{
+	position: absolute;
+	width: 74px;
+	height: 74px;
+	top: 20px;
+	right: 20px;
+}
+#page4 .dialogue .dialogue_scroll .animateImg .headIcon img{
+	width: 74px;
+	height: 74px;
+	display: block;
+}
+
+#page4 .dialogue .dialogue_scroll .animateImgFinal{
+	padding: 20px;
+}
+
+
+/*quesetion 第二版*/
+#questionGroup{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page04/tk4.png) no-repeat;
+	-webkit-animation-name: slideinfromtop;
+	-webkit-animation-duration: 500ms;
+	-webkit-animation-fill-mode: both;
+	-webkit-animation-delay: 10ms;
+	animation-name: slideinfromtop;
+	animation-duration: 500ms;
+    animation-fill-mode: both;
+    -webkit-animation-delay: 10ms;
+}
+@-webkit-keyframes slideinfromtop {
+    from { -webkit-transform: translateY(36%); }
+    to { -webkit-transform: translateY(0); }
+}
+@keyframes slideinfromtop {
+    from { transform: translateY(36%); }
+    to { transform: translateY(0); }
+}
+#questionGroup .question1,
+#questionGroup .question2,
+#questionGroup .question3{
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 500px;
+	bottom: 0;
+}
+#questionGroup .question1 .animation,
+#questionGroup .question2 .animation,
+#questionGroup .question3 .animation{
+	position: absolute;
+	top: 45px;
+	width: 396px;
+	padding-top: 30px;
+	background-color: #fff;
+	margin: auto;
+	left: 0;
+	right: 0;
+	border-radius: 8px;
+}
+#questionGroup .question1 .animation .item,
+#questionGroup .question2 .animation .item,
+#questionGroup .question3 .animation .item{
+	text-align: center;
+	margin-bottom: 55px;
+	-webkit-animation-name: zoom;
+	-webkit-animation-iteration-count: infinite;
+	animation-name: zoom;
+	animation-iteration-count: infinite;
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+}
+#questionGroup .question3 .animation .item .guide{
+	position: absolute;
+	top: -12px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 100px;
+	height: 100px;
+	-webkit-animation: flashing 1.2s infinite;
+	animation: flashing 1.2s infinite;
+}
+#questionGroup .question3 .animation .item .guide img{
+	display: block;
+	width: 100px;
+}
+#questionGroup .question1 .animation .item:nth-child(1),
+#questionGroup .question2 .animation .item:nth-child(1),
+#questionGroup .question3 .animation .item:nth-child(1){
+	-webkit-animation-duration: 1500ms;
+	animation-duration: 1500ms;
+}
+#questionGroup .question1 .animation .item:nth-child(2),
+#questionGroup .question2 .animation .item:nth-child(2),
+#questionGroup .question3 .animation .item:nth-child(2){
+	-webkit-animation-duration: 1500ms;
+	-webkit-animation-delay: 750ms;
+	animation-duration: 1500ms;
+	animation-delay: 750ms;
+}
+#questionGroup .question1 .sendBtn,
+#questionGroup .question2 .sendBtn,
+#questionGroup .question3 .sendBtn{
+	position: absolute;
+	bottom: -7px;
+	right: 3px;
+	display: none;
+}
+#questionGroup .question1 .showText,
+#questionGroup .question2 .showText,
+#questionGroup .question3 .showText{
+	margin-top: 13px;
+	display: none;
+}
+#questionGroup .question2 .showText{ padding-left: 55px;}
+#questionGroup .question3 .showText{ padding-left: 5px;}
+#questionGroup .question1 .showText img,
+#questionGroup .question2 .showText img,
+#questionGroup .question3 .showText img{
+	display: none;
+}
+
+#speakBox{
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;bottom: 0;
+	right: 0;left: 0;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page04/speakBox.png) no-repeat;
+	
+	-webkit-transform: scale(1);
+	-webkit-animation-name: popin;
+	-webkit-animation-duration: 350ms;
+	-webkit-animation-fill-mode: both;
+	transform: scale(1);
+	animation-name: popin;
+	animation-duration: 350ms;
+    animation-fill-mode: both;
+    opacity: 1;
+}
+#speakBox .myDialog{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	display: none;
+}
+#speakBox .myDialog .information{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 522px;
+	margin: auto;
+	height: 662px;
+	bottom: 150px;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page04/liuZi.png) no-repeat;
+	padding-left: 19px;
+	box-sizing: border-box;
+	box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.3);
+}
+#speakBox .myDialog .information label{
+	display: block;
+	font-size: 35px;
+	margin-bottom: 74px;
+	margin-top: 240px;
+	padding-left: 100px;
+	margin-left: 50px;
+}
+#speakBox .myDialog .information label:first-child{
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page04/liuZi_name.png) no-repeat left center;
+}
+#speakBox .myDialog .information label:nth-child(2){
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page04/liuZi_phone.png) no-repeat left center;
+	margin-top: 0;
+	margin-bottom: 126px;
+}
+#speakBox .myDialog .information .input{
+	width: 290px;
+	font-size: 45px;
+	background-color: #fff;
+	margin-left: 18px;
+	border: 1px solid #898989;
+	border-radius: 4px;
+	text-align: center;
+	height: 60px;
+}
+#speakBox .myDialog .information .submit{
+	display: block;
+	width: 240px;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	background-color: #009EFF;
+	color: #fff;
+	border-radius: 5px;
+	margin: auto;
+	font-size: 35px;
+	text-indent: 9999999999px;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page04/liuZi_submit.png) no-repeat center;
+}
+#speakBox .guide{
+	position: absolute;
+	bottom: 100px;
+	left: 113px;
+	display: none;
+	width: 377px;
+	height: 173px;
+}
+#speakBox .guide.btn01{ }
+#speakBox .guide.btn02{ }
+#speakBox .guide.btn03{ }
+
+#share{
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/box/share.png) no-repeat;
+	display: none;
+	z-index: 99999;
+	position: absolute;
+	top: 0;
+}
+
+/*page5*/
+#page5{
+	display: none;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page05/bg05.jpg) no-repeat center;
+}
+#page5 .my-content{
+	top: 18px;
+	padding-top: 100px;
+	width: 580px;
+	height: 615px;
+	margin: auto;
+	background-color: rgba(74, 105, 130, 0.4);
+	border-radius: 9px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+#page5 .my-content .closeBtn{
+	position: absolute;
+	top: -15px;
+	right: -27px;
+}
+#page5 .my-content .my-item{
+	overflow: hidden;
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+#page5 .my-content .my-item p{
+	font-size: 22px;
+	color: #fff;
+	margin-bottom: 13px;
+}
+#page5 .my-content .my-item p span{
+	color: #61b3f5;
+	padding-right: 30px;
+}
+#page5 .my-content .phoneBtn{
+	display: block;
+	width: 444px;
+	margin: auto;
+	margin-top: 130px;
+	height: 77px;
+}
+#page5 .my-content .phoneBtn img{}
+
+#page6{
+	display: none;
+	background: url(http://static.ttsales.cn/ttsales-cms/pages/htmls/images/ftqc001/page06/bg.jpg) no-repeat center;
+}
+#page6 .receive{
+	position: absolute;
+	bottom: 50px;
+	right: 100px;
+	display: block;
+}
+#page6 .receive .guide{
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	-webkit-animation: flashing 1.2s infinite;
+	animation: flashing 1.2s infinite;
+}
+#page6 .refuse{
+	position: absolute;
+	bottom: 50px;
+	left: 100px;
+}
+
+
+/*按钮 动效*/
+@-webkit-keyframes flashing {
+	0% {opacity: 0;}
+	50% {opacity: 1;}
+	100% {opacity: 0;}
+}
+@keyframes flashing {
+	0% {opacity: 0;}
+	50% {opacity: 1;}
+	100% {opacity: 0;}
+}
+/*选项 动效*/
+@-webkit-keyframes zoom {
+    0% {
+        -webkit-transform: scale(1.2);
+        opacity: 0.9;
+    }
+    50% {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+    	-webkit-transform: scale(1.2);
+        opacity: 0.9;
+    }
+}
+@keyframes zoom {
+    0% {
+        transform: scale(1.2);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+    	-webkit-transform: scale(1.2);
+        opacity: 0.9;
+    }
+}

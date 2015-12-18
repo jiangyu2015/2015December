@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>中奖记录</title>
+<base href="../../">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,target-densitydpi=medium-dpi" >
+<link rel="stylesheet" href="http://static.ttsales.cn/ttsales-cms/resources/sas/css/common.v4.css?v=v2.0.1_20150608" />
+<link rel="stylesheet" href="http://static.ttsales.cn/ttsales-cms/resources/humane/humane/custom.css" />
+<link rel="stylesheet" href="http://static.ttsales.cn/ttsales-cms/pages/htmls/css/whky041/flop_list_whky041.css?v=v2.0.1_20150608"> 
+<script type="text/javascript" src="http://static.ttsales.cn/ttsales-cms/resources/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://static.ttsales.cn/ttsales-cms/resources/humane/humane.min.js"></script>
+<script type="text/javascript" src="http://static.ttsales.cn/ttsales-cms/resources/sas/jquery.sas.js?v=v2.0.1_20150608"></script>
+<script type="text/javascript" src="http://static.ttsales.cn/ttsales-cms/resources/weixinJS/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://static.ttsales.cn/ttsales-cms/resources/weixinJS/weixin-wrapper.js?v=v2.0.1_20150608"></script>
+
+<script type="text/javascript">
+ var flopList = (function(){
+	
+	 function initFlopList(){
+		 $.ajax({
+				type: 'POST',
+				url: 'whky041/flop/getFlopsCount.do',
+				data: {
+				 	
+				},
+				success: function(data) {
+					var flops = data.flopsCount;
+					if(flops==null){
+						return;
+					}
+					var html = "";
+					for(var i=0;i<flops.length;i++){  
+						var imgsrc = "pages/htmls/images/whky037/"+flops[i].flop_key+".png";
+ 						var img="<p><img alt='tic'  src='"+imgsrc+"' />"+"<span>*"+flops[i].sum+"</sapn></p>";
+						html=html+img; 
+					} 
+					$('#FlopListDiv').html(html);
+					setTimeout(function(){
+						$('#remark_div').show();
+					},100);
+				},
+				dataType: 'json'
+			});
+	 }
+	 
+	return {
+		initFlopList:function(){
+			initFlopList();
+		}
+	}
+})();
+
+$(function(){
+	weixin.config({
+        debug: false,
+        jsApiList: ['onMenuShareTimeline','hideOptionMenu','hideMenuItems', 'showOptionMenu', 'closeWindow']
+    });
+	weixin.ready(function () {
+		weixin.hideOptionMenu();
+		flopList.initFlopList();
+	});
+	//flopList.initFlopList();
+});
+</script>
+</head>
+
+<body> 
+	<div class="page-full-screen page-bg">
+		<div class="page-container font-family-heiti"> 
+		  	<img class="logo" src="http://static.ttsales.cn/ttsales-cms/pages/htmls/images/whky037/car-logo.png"/>
+		   	<img class="logo-title" src="http://static.ttsales.cn/ttsales-cms/pages/htmls/images/whky037/car-logo-title.png"/>
+		   	<img class="logo-card" src="http://static.ttsales.cn/ttsales-cms/pages/htmls/images/whky037/card-bg.png"/>
+		   	
+			<div class="flop-list-div" id="FlopListDiv"></div> 
+			
+			<div id="remark_div">
+				<div class="remark-div">
+					凯翼热线： 400－666－7777
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

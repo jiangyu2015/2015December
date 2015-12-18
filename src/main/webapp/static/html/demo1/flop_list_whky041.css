@@ -1,0 +1,65 @@
+.page-bg{
+	background:url('http://static.ttsales.cn/ttsales-cms/pages/htmls/images/whky037/bg.jpg') no-repeat center center;
+	background-size: cover;
+	background-color: #858b91;
+	overflow: auto;
+}
+.logo {
+	width: 39px; 
+	margin: 15px 20px; 
+	float: left;
+}
+.logo-title {
+	width: 225px; 
+	margin-top: 25px;
+}
+.logo-card {
+	position:absolute;
+	bottom:100px;
+	left:0;
+	right:0;
+	margin:auto;
+	width:120px;
+}
+.flop-list-div {
+	width: 260px;
+	margin: auto;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	position: relative;
+}
+.flop-list-div img{
+	width: 260px;
+}
+.QRcode-img {
+	width: 80%;
+	margin-top: 16px;
+	margin-left: 10%;
+}
+#remark_div {
+	position: relative;
+	display: none; 
+}
+.remark-div {
+	text-align: center;
+	color: #151515;
+	font-size: 12px;
+	margin: 10px 20px;
+}
+#FlopListDiv{
+	margin:auto;
+	margin-top:80px;
+	margin-bottom:50px;
+	width:260px;
+}
+#FlopListDiv p{
+	position:relative;
+}
+#FlopListDiv p img{
+	width:260px;
+}
+#FlopListDiv p span{
+	position: absolute;
+	top: 35px;
+	right: -25px;
+}
