@@ -1,0 +1,6 @@
+EnvironmentCapable
+ListableBeanFactory
+MessageSource
+ApplicationEventPublisher
+HierarchicalBeanFactory
+ResourcePatternResolver
