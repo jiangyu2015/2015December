@@ -59,11 +59,11 @@
         $ele.css(css);
     }
 
-    function swing($ele, infinite, time) {
+    function swing($ele, time, infinite) {
         animate($ele, infinite ? swingInfiniteCss : swingCss, time);
     }
 
-    function bounce($ele, infinite, time) {
+    function bounce($ele, time, infinite) {
         animate($ele, infinite ? bounceInfiniteCss : bounceCss, time);
     }
 
@@ -78,7 +78,7 @@
         setTimeout(function () {
             $ele.css(showCss);
             if (callback) {
-                callback($ele, infinate);
+                callback($ele, 0, infinate);
             }
         }, end);
     }
@@ -199,7 +199,7 @@
         animation($page5PeopleTalkImg, start, start + delta, swing);
     }
 
-    page5Animation();
+    page1Animation();
 }();
 
 
