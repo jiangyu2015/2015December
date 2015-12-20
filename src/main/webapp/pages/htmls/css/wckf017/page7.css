@@ -1,0 +1,32 @@
+
+#page7 {
+    background: url("../../images/wckf017/7/背景.jpg");
+}
+
+.page7-people-img {
+    bottom: 0;
+    left: 20px;
+    width: 330px;
+    height: 555px;
+}
+
+.page7-title1-img {
+    top: 43px;
+    left: 50px;
+    width: 413px;
+    height: 380px;
+}
+
+.page7-title2-img {
+    top: 280px;
+    left: 230px;
+    width: 396px;
+    height: 245px;
+}
+
+.page7-title3-img {
+    top: 540px;
+    left: 320px;
+    width: 328px;
+    height: 171px;
+}

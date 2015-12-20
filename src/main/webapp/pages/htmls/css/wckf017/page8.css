@@ -1,0 +1,32 @@
+
+#page8 {
+    background: url("../../images/wckf017/8/背景.jpg");
+}
+
+.page8-people-left-down-img {
+    bottom: 0;
+    left: 10px;
+    width: 191px;
+    height: 430px;
+}
+
+.page8-people-right-up-img {
+    top: 0;
+    right: 0;
+    width: 289px;
+    height: 343px;
+}
+
+.page8-talk1-img {
+    top: 100px;
+    left: 10px;
+    width: 465px;
+    height: 320px;
+}
+
+.page8-talk2-img {
+    top: 500px;
+    right: 10px;
+    width: 464px;
+    height: 206px;
+}

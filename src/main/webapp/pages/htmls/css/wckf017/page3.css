@@ -1,0 +1,52 @@
+#page2 {
+    background: url("../../images/wckf017/3/背景.jpg");
+}
+
+.page3-people-img {
+    bottom: 0;
+    right: 10px;
+    width: 459px;
+    height: 768px;
+}
+
+.page3-line-img {
+    top: 165px;
+    left: 80px;
+    width: 196px;
+    height: 525px;
+}
+
+.page3-red1-img {
+    top: 40px;
+    left: 50px;
+    width: 271px;
+    height: 229px;
+}
+
+.page3-red2-img {
+    top: 585px;
+    left: 35px;
+    width: 274px;
+    height: 225px;
+}
+
+.page3-red3-img {
+    top: 315px;
+    left: 50px;
+    width: 110px;
+    height: 113px;
+}
+
+.page3-talk1-img {
+    top: 450px;
+    left: 10px;
+    width: 328px;
+    height: 130px;
+}
+
+.page3-talk2-img {
+    top: 20px;
+    right: 10px;
+    width: 358px;
+    height: 128px;
+}

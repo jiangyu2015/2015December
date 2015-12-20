@@ -1,0 +1,69 @@
+
+.absolute {
+    position: absolute;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+#page1 {
+    background: url("../../images/wckf017/1/背景.jpg");
+}
+
+.page1-title-img {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 579px;
+    height: 394px;
+}
+
+.page1-jin-zheng-en-img {
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    width: 423px;
+    height: 220px;
+}
+
+.page1-whereby-1 {
+    position: absolute;
+    left: 30px;
+    top: 375px;
+    width: 213px;
+    height: 137px;
+}
+
+.page1-whereby-2 {
+    position: absolute;
+    left: 40px;
+    top: 500px;
+    width: 250px;
+    height: 205px;
+}
+
+.page1-whereby-3 {
+    position: absolute;
+    left: 280px;
+    top: 370px;
+    width: 273px;
+    height: 120px;
+}
+
+.page1-listen-to-you-1 {
+    position: absolute;
+    left: 390px;
+    top: 430px;
+    width: 227px;
+    height: 225px;
+}
+
+.page1-listen-to-you-2 {
+    position: absolute;
+    left: 250px;
+    top: 650px;
+    width: 140px;
+    height: 37px;
+}

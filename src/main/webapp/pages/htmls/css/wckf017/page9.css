@@ -1,0 +1,17 @@
+#page9 {
+    background: url("../../images/wckf017/9/背景.jpg");
+}
+
+.page9-people-img {
+    left: 150px;
+    bottom: 0;
+    width: 219px;
+    height: 510px;
+}
+
+.page9-talk-img {
+    top:0;
+    left: 20px;
+    width: 599px;
+    height: 553px;
+}

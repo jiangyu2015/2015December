@@ -1,0 +1,27 @@
+#page2 {
+    background: url("../../images/wckf017/2/背景.jpg");
+}
+
+.page2-people-img {
+    position: absolute;
+    bottom: 0;
+    left: 30px;
+    width: 554px;
+    height: 586px;
+}
+
+.page2-talk1-img {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 293px;
+    height: 389px;
+}
+
+.page2-talk2-img {
+    position: absolute;
+    top: 150px;
+    right: 30px;
+    width: 252px;
+    height: 175px;
+}

@@ -1,0 +1,38 @@
+#page6 {
+    background: url("../../images/wckf017/6/背景.jpg");
+}
+
+.page6-talk-img {
+    bottom: 150px;
+    left: 90px;
+    width: 460px;
+    height: 419px;
+}
+
+.page6-title-img {
+    top: 20px;
+    left: 33px;
+    width: 573px;
+    height: 340px;
+}
+
+.page6-title2-img {
+    top: 20px;
+    left: 33px;
+    width: 573px;
+    height: 340px;
+}
+
+.page6-btn-img {
+    bottom: 15px;
+    left: 210px;
+    width: 226px;
+    height: 107px;
+}
+
+.page6-title-line-img {
+    top: 3px;
+    left: 25px;
+    width: 565px;
+    height: 301px;
+}

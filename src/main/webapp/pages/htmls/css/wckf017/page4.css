@@ -1,0 +1,38 @@
+#page4 {
+    background: url("../../images/wckf017/4/背景.jpg");
+}
+
+.page4-cloud-img {
+    top: 320px;
+    left: 220px;
+    width: 147px;
+    height: 165px;
+}
+
+.page4-button-img {
+    bottom: 0;
+    left: 220px;
+    width: 226px;
+    height: 107px;
+}
+
+.page4-talk-img {
+    top: 500px;
+    left: 110px;
+    width: 434px;
+    height: 327px;
+}
+
+.page4-title1-img {
+    top: 0;
+    left: 45px;
+    width: 552px;
+    height: 376px;
+}
+
+.page4-title2-img {
+    top: 0;
+    left: 45px;
+    width: 510px;
+    height: 346px;
+}

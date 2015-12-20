@@ -1,0 +1,73 @@
+#page5 {
+    background: url("../../images/wckf017/5/背景.jpg");
+}
+
+.page5-talk-img {
+    top: 450px;
+    left: 20px;
+    width: 316px;
+    height: 374px;
+}
+
+.page5-red1-img {
+    top: 10px;
+    left: 20px;
+    width: 156px;
+    height: 278px;
+}
+
+.page5-red-line-img {
+    top: 0;
+    left: 80px;
+    width: 473px;
+    height: 410px;
+}
+
+.page5-red2-img {
+    top: 25px;
+    left: 160px;
+    width: 146px;
+    height: 163px;
+}
+
+.page5-red3-img {
+    top: 90px;
+    left: 260px;
+    width: 205px;
+    height: 181px;
+}
+
+.page5-red4-img {
+    top: 0;
+    left: 470px;
+    width: 115px;
+    height: 124px;
+}
+
+.page5-people-img {
+    right: 0;
+    bottom: 0;
+    width: 293px;
+    height: 659px;
+}
+
+.page5-people-sweat-img {
+    right: 100px;
+    bottom: 200px;
+    width: 14px;
+    height: 39px;
+}
+
+.page5-people-talk-img {
+    top: 165px;
+    right: 40px;
+    width: 170px;
+    height: 146px;
+}
+
+.page5-talk-line-img {
+    top: 380px;
+    left: 270px;
+    width: 102px;
+    height: 132px;
+}
