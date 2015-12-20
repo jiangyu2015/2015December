@@ -13,11 +13,11 @@ var webScroll = function () {
         }
         var $element = $("body");
         var touchEvents = {
-                touchstart: "touchstart",
-                touchmove: "touchmove",
-                touchend: "touchend"
-            },
-            startX, startY, x, y;
+            touchstart: "touchstart",
+            touchmove: "touchmove",
+            touchend: "touchend"
+        };
+        var startX, startY, x, y;
         $element.bind(touchEvents.touchstart, function (event) {
             var touch = event.originalEvent.touches[0];
             startX = touch.pageX;
@@ -60,6 +60,7 @@ var webScroll = function () {
         var len = $pages.length;
         var $pageOut = $(".page.in");
         var index = $pages.index($pageOut);
+        //var index = $pageOut.attr('id').substring(4);
         if (index + 1 < len) {
             index = index + 1;
         } else {
