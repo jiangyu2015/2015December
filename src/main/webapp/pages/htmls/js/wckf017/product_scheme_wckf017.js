@@ -14,43 +14,58 @@
     });
 
     var animationCss = {
-        animation: ':fadeIn .5s'
+        animation: 'fadeIn .5s'
+    };
+    var swingCss = {
+        animation: 'swing .5s'
     };
     var showCss = {
         opacity: '1'
     };
 
+    function swing($ele) {
+        $ele.css(swingCss);
+    }
+
     function reset($elements) {
         $elements.css('opacity', 0);
     }
 
-    function animation($ele, start, end) {
+    function animation($ele, start, end, callback) {
         setTimeout(function () {
             $ele.css(animationCss);
         }, start);
         setTimeout(function () {
             $ele.css(showCss);
+            if (callback) {
+                callback($ele);
+            }
         }, end);
     }
 
     //page1
     function page1Animation() {
+        var $page1TitleImg = $('.page1-title-img');
+        var $page1JinZhengEnImg = $('.page1-jin-zheng-en-img');
+
         var $page1Whereby1 = $('.page1-whereby-1');
         var $page1Whereby2 = $('.page1-whereby-2');
         var $page1Whereby3 = $('.page1-whereby-3');
         var $page1ListenToYou1 = $('.page1-listen-to-you-1');
         var $page1ListenToYou2 = $('.page1-listen-to-you-2');
 
+        swing($page1TitleImg);
+        swing($page1JinZhengEnImg);
         reset($page1Whereby1.add($page1Whereby2).add($page1Whereby3).add($page1ListenToYou1).add($page1ListenToYou2));
-        animation($page1Whereby1, start, start + delta);
+        animation($page1Whereby1, start, start + delta, swing);
         start += delta;
-        animation($page1Whereby2, start, start + delta);
+        animation($page1Whereby2, start, start + delta, swing);
         start += delta;
-        animation($page1Whereby3, start, start + delta);
+        animation($page1Whereby3, start, start + delta, swing);
         start += delta;
-        animation($page1ListenToYou2, start, start + delta);
+        animation($page1ListenToYou2, start, start + delta, swing);
         start += delta;
-        animation($page1ListenToYou1, start, start + delta);
+        animation($page1ListenToYou1, start, start + delta, swing);
     }
 
     // page2
@@ -59,11 +74,11 @@
         var $page2Talk1Img = $('.page2-talk1-img');
         var $page2Talk2Img = $('.page2-talk2-img');
         reset($page2PeopleImg.add($page2Talk1Img).add($page2Talk2Img));
-        animation($page2PeopleImg, start, start + delta);
+        animation($page2PeopleImg, start, start + delta, swing);
         start += delta;
-        animation($page2Talk1Img, start, start + delta);
+        animation($page2Talk1Img, start, start + delta, swing);
         start += delta;
-        animation($page2Talk2Img, start, start + delta);
+        animation($page2Talk2Img, start, start + delta, swing);
     }
 
     page1Animation();
