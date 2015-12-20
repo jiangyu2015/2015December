@@ -20,6 +20,7 @@
                 page4Animation();
                 break;
             case 4:
+                page5Animation();
                 break;
             case 5:
                 break;
