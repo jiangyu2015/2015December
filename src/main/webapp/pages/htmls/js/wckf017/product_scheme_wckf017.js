@@ -14,10 +14,10 @@
     });
 
     var animationCss = {
-        animation: 'fadeIn .5s'
+        animation: 'fadeIn .7s'
     };
     var swingCss = {
-        animation: 'swing .5s'
+        animation: 'swing .7s'
     };
     var showCss = {
         opacity: '1'
