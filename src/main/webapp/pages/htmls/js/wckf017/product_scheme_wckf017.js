@@ -23,7 +23,13 @@
         opacity: '1'
     };
 
-    function swing($ele) {
+    function swing($ele, time) {
+        if (time) {
+            setTimeout(function () {
+                $ele.css(swingCss);
+            }, time);
+            return;
+        }
         $ele.css(swingCss);
     }
 
@@ -47,16 +53,17 @@
     function page1Animation() {
         var $page1TitleImg = $('.page1-title-img');
         var $page1JinZhengEnImg = $('.page1-jin-zheng-en-img');
-
         var $page1Whereby1 = $('.page1-whereby-1');
         var $page1Whereby2 = $('.page1-whereby-2');
         var $page1Whereby3 = $('.page1-whereby-3');
         var $page1ListenToYou1 = $('.page1-listen-to-you-1');
         var $page1ListenToYou2 = $('.page1-listen-to-you-2');
-
-        swing($page1TitleImg);
-        swing($page1JinZhengEnImg);
         reset($page1Whereby1.add($page1Whereby2).add($page1Whereby3).add($page1ListenToYou1).add($page1ListenToYou2));
+
+        swing($page1TitleImg, start);
+        start += delta;
+        swing($page1JinZhengEnImg, start);
+        start += delta;
         animation($page1Whereby1, start, start + delta, swing);
         start += delta;
         animation($page1Whereby2, start, start + delta, swing);
