@@ -28,12 +28,15 @@ var webScroll = function () {
             startY = touch.pageY;
         });
         $element.on(touchEvents.touchmove, function (event) {
-            if (currentPage != 10) {
-                event.preventDefault();
-            }
             var touch = event.touches[0];
             x = touch.pageX - startX;
             y = touch.pageY - startY;
+            if (currentPage != 10) {
+                event.preventDefault();
+            }
+            if (currentPage == 10 && !pageScroll && y > 0) {
+                event.preventDefault();
+            }
         });
         $element.on(touchEvents.touchend, function (event) {
             if (pageScroll) {
