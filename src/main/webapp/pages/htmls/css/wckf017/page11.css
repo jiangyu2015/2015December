@@ -46,15 +46,16 @@
 
 .page11-card-rating-list {
     top: 1020px;
-    left: 50px;
-    right: 50px;
+    left: 20px;
+    right: 20px;
     color: #fff;
     background-color: #4399bc;
 }
 
 .row {
-    height: 35px;
-    line-height: 35px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
     margin: 0 auto;
 }
 
@@ -70,6 +71,8 @@
 
 .cell_1, .cell_2, .cell_3, .cell_4 {
     float: left;
+    word-break: keep-all;
+    white-space: nowrap;
     text-align: center;
 }
 
@@ -94,9 +97,9 @@
 }
 
 .list-head {
-    height: 45px;
-    line-height: 45px;
-    font-size: 20px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 25px;
 }
 
 .cell-heart-img {
