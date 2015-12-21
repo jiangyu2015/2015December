@@ -1,3 +1,12 @@
+.page.in {
+    display: block;
+    visibility: visible;
+}
+
+.page.out {
+    display: block;
+    visibility: hidden;
+}
 
 .absolute {
     position: absolute;
@@ -113,7 +122,6 @@ img {
 }
 
 .page1-whereby-1 {
-    opacity: 0;
     left: 30px;
     top: 375px;
     width: 213px;
