@@ -5,7 +5,7 @@ var webScroll = function () {
     };
 
     var listeners = [];
-    var currentPage;
+    var currentPage, nextPage, pageScroll;
 
     function init(op) {
         if (op) {
@@ -21,6 +21,8 @@ var webScroll = function () {
         };
         var startX, startY, x, y;
         $element.on(touchEvents.touchstart, function (event) {
+            var top = $('#page11').find('.rt-content').scrollTop();
+            pageScroll = (top != 0 && currentPage == 10);
             var touch = event.touches[0];
             startX = touch.pageX;
             startY = touch.pageY;
@@ -34,13 +36,17 @@ var webScroll = function () {
             y = touch.pageY - startY;
         });
         $element.on(touchEvents.touchend, function (event) {
+            if (pageScroll) {
+                return;
+            }
             if (Math.abs(x) < Math.abs(y)) {
                 if (y < 0) {
-                    currentPage = showA();
+                    nextPage = showA();
                 } else {
-                    currentPage = showB();
+                    nextPage = showB();
                 }
-                if (currentPage != -1) {
+                if (nextPage != -1) {
+                    currentPage = nextPage;
                     for (var i = 0; i < listeners.length; i++) {
                         var listener = listeners[i];
                         listener(currentPage);
