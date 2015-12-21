@@ -311,7 +311,8 @@
         var $page11BusinessCardRanking = $('.page11-business-card-ranking');
         var $page11CardRatingList = $('.page11-card-rating-list');
 
-        var url = 'http://10.137.1.121:2341';
+        //var url = 'http://10.137.1.121:2341';
+        var url = 'http://weiche.jiangyu.site:1220';
         $.ajax({
             url: 'http://test.ttsales.cn/ttsales-web/sub/businessCardView/getBusCardRank.do?count=20&url=' + url,
             type: 'get',
@@ -342,9 +343,9 @@
         animation($page11FirstLetterImg, start, start + delta, fadeIn);
         start += delta;
         animation($page11ShareMeetingImg, start, start + delta, fadeIn);
+        animation($page11BtnImg, start, start + delta, swing);
         start += delta;
         animation($page11BusinessCardRanking, start, start + delta, fadeIn);
-        animation($page11BtnImg, start, start + delta, swing);
     }
 
     page1Animation();
