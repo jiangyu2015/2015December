@@ -182,10 +182,9 @@
         var $page4TalkImg = $('.page4-talk-img');
         var $page4Title1Img = $('.page4-title1-img');
         var $page4Title2Img = $('.page4-title2-img');
+
         reset($page4TalkImg.add($page4CloudImg).add($page4ButtonImg));
-        animation($page4Title1Img, start, start + delta, fadeIn, 'medium');
-        start += delta;
-        animation($page4Title2Img, start, start + delta, fadeIn, 'slow');
+        animation($page4Title2Img, start, start + delta, fadeIn, 'medium');
         start += delta;
         animation($page4TalkImg, start, start + delta, swing);
         start += delta;
