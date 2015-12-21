@@ -8,6 +8,7 @@
     left: 10px;
     width: 191px;
     height: 430px;
+    z-index: 9;
 }
 
 .page8-people-right-up-img {
@@ -15,6 +16,7 @@
     right: 0;
     width: 289px;
     height: 343px;
+    z-index: 9;
 }
 
 .page8-talk1-img {

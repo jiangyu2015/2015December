@@ -48,9 +48,9 @@
 
     var animationCss = {
         common: {
-            fast: '.5',
-            medium: '1',
-            slow: '1.5',
+            fast: '.4',
+            medium: '.9',
+            slow: '1.4',
             animation: 'swing .5s'
         }
     };
@@ -121,11 +121,9 @@
         var $page1Whereby3 = $('.page1-whereby-3');
         var $page1ListenToYou1 = $('.page1-listen-to-you-1');
         var $page1ListenToYou2 = $('.page1-listen-to-you-2');
-        reset($page1Whereby1.add($page1Whereby2).add($page1Whereby3).add($page1ListenToYou1).add($page1ListenToYou2));
+        reset($page1TitleImg.add($page1JinZhengEnImg).add($page1Whereby1).add($page1Whereby2).add($page1Whereby3).add($page1ListenToYou1).add($page1ListenToYou2));
 
-        swing($page1TitleImg, start);
-        start += delta;
-        swing($page1JinZhengEnImg, start);
+        animation($page1TitleImg, start, start + delta, fadeIn);
         start += delta;
         animation($page1Whereby1, start, start + delta, beat);
         start += delta;
@@ -136,6 +134,8 @@
         animation($page1ListenToYou2, start, start + delta, beat);
         start += delta;
         animation($page1ListenToYou1, start, start + delta, beat);
+        start += delta2;
+        animation($page1JinZhengEnImg, start, start + delta, swing);
     }
 
     // page2
@@ -143,9 +143,9 @@
         var $page2PeopleImg = $('.page2-people-img');
         var $page2Talk1Img = $('.page2-talk1-img');
         var $page2Talk2Img = $('.page2-talk2-img');
-        reset($page2PeopleImg.add($page2Talk1Img).add($page2Talk2Img));
-        animation($page2PeopleImg, start, start + delta, swing);
-        start += delta2;
+        reset($page2Talk1Img.add($page2Talk2Img));
+        /*animation($page2PeopleImg, start, start + delta, swing);
+         start += delta2;*/
         animation($page2Talk1Img, start, start + delta, swing);
         start += delta2;
         animation($page2Talk2Img, start, start + delta, swing);
@@ -161,8 +161,8 @@
         var $page3Red3Img = $('.page3-red3-img');
 
         reset($page3LineImg.add($page3Talk1Img).add($page3Talk2Img).add($page3Red1Img).add($page3Red2Img).add($page3Red3Img));
-        swing($page3PeopleImg, start);
-        start += delta2;
+        /*swing($page3PeopleImg, start);
+         start += delta2;*/
         animation($page3Talk1Img, start, start + delta, swing);
         start += delta2;
         animation($page3Talk2Img, start, start + delta, swing);
@@ -182,11 +182,11 @@
         var $page4TalkImg = $('.page4-talk-img');
         var $page4Title1Img = $('.page4-title1-img');
         var $page4Title2Img = $('.page4-title2-img');
-        reset($page4TalkImg.add($page4CloudImg).add($page4ButtonImg).add($page4Title1Img).add($page4Title2Img));
-        animation($page4Title2Img, start, start + delta, swing);
-        start += delta2;
-        animation($page4Title1Img, start, start + delta, fadeIn, 'fast');
-        start += delta2;
+        reset($page4TalkImg.add($page4CloudImg).add($page4ButtonImg));
+        animation($page4Title1Img, start, start + delta, fadeIn, 'medium');
+        start += delta;
+        animation($page4Title2Img, start, start + delta, fadeIn, 'slow');
+        start += delta;
         animation($page4TalkImg, start, start + delta, swing);
         start += delta;
         animation($page4CloudImg, start, start + delta, swing);
@@ -206,9 +206,7 @@
         var $page5PeopleTalkImg = $('.page5-people-talk-img');
         var $page5TalkLineImg = $('.page5-talk-line-img');
         reset($page5TalkImg.add($page5Red1Img).add($page5RedLineImg).add($page5Red2Img).add($page5Red3Img));
-        reset($page5Red4Img.add($page5PeopleImg).add($page5PeopleSweatImg).add($page5PeopleTalkImg).add($page5TalkLineImg));
-        animation($page5PeopleImg, start, start + delta, swing);
-        start += delta;
+        reset($page5Red4Img.add($page5PeopleSweatImg).add($page5PeopleTalkImg).add($page5TalkLineImg));
         animation($page5TalkLineImg, start, start + delta, fadeIn, true);
         start += delta;
         animation($page5TalkImg, start, start + delta, swing);
@@ -235,31 +233,30 @@
         var $page6TitleLineImg = $('.page6-title-line-img');
         var $page6BtnImg = $('.page6-btn-img');
 
-        reset($page6TalkImg.add($page6TitleImg).add($page6Title2Img).add($page6BtnImg).add($page6TitleLineImg));
-        animation($page6TitleImg, start, start + delta, swing);
-        start += delta2;
+        reset($page6TalkImg.add($page6Title2Img).add($page6BtnImg).add($page6TitleLineImg));
+        /*animation($page6TitleImg, start, start + delta, swing);
+         start += delta2;*/
         animation($page6Title2Img, start, start + delta, fadeIn, true);
-        start += delta2;
+        start += delta;
         animation($page6TitleLineImg, start, start + delta, fadeIn, 'fast');
         start += delta2;
         animation($page6TalkImg, start, start + delta, swing);
-        start += delt2a;
+        start += delta2;
         animation($page6BtnImg, start, start + delta, swing);
     }
 
     function page7Animation() {
-        var $page7PeopleImg = $('.page7-people-img');
+        //var $page7PeopleImg = $('.page7-people-img');
         var $page7Title1Img = $('.page7-title1-img');
         var $page7Title2Img = $('.page7-title2-img');
         var $page7Title3Img = $('.page7-title3-img');
 
-        reset($page7PeopleImg.add($page7Title1Img).add($page7Title2Img).add($page7Title3Img));
-        animation($page7PeopleImg, start, start + delta, swing);
+        reset($page7Title1Img.add($page7Title2Img).add($page7Title3Img));
         start += delta;
         animation($page7Title1Img, start, start + delta, swing);
-        start += delta * 2;
+        start += delta2;
         animation($page7Title2Img, start, start + delta, swing);
-        start += delta * 2;
+        start += delta2;
         animation($page7Title3Img, start, start + delta, swing);
     }
 
@@ -269,23 +266,19 @@
         var $page8Talk1Img = $('.page8-talk1-img');
         var $page8Talk2Img = $('.page8-talk2-img');
 
-        reset($page8PeopleLeftDownImg.add($page8PeopleRightUpImg).add($page8Talk1Img).add($page8Talk2Img));
-        animation($page8PeopleRightUpImg, start, start + delta, swing);
-        start += delta2;
+        reset($page8Talk1Img.add($page8Talk2Img).add($page8PeopleLeftDownImg));
         animation($page8Talk1Img, start, start + delta, swing);
         start += delta2;
-        animation($page8PeopleLeftDownImg, start, start + delta, swing);
+        animation($page8PeopleLeftDownImg, start, start + delta, fadeIn);
         start += delta2;
         animation($page8Talk2Img, start, start + delta, swing);
     }
 
     function page9Animation() {
-        var $page9PeopleImg = $('.page9-people-img');
+        //var $page9PeopleImg = $('.page9-people-img');
         var $page9TalkImg = $('.page9-talk-img');
 
-        reset($page9PeopleImg.add($page9TalkImg));
-        animation($page9PeopleImg, start, start + delta, swing);
-        start += delta2;
+        reset($page9TalkImg);
         animation($page9TalkImg, start, start + delta, swing);
     }
 
@@ -296,11 +289,8 @@
         var $page10TitleLineImg = $('.page10-title-line-img');
         var $page10TtnImg = $('.page10-btn-img');
 
-        reset($page10TalkImg.add($page10TitleImg).add($page10Title2Img).add($page10TitleLineImg).add($page10TtnImg));
-        animation($page10TitleImg, start, start + delta, swing);
-        start += delta2;
+        reset($page10TalkImg.add($page10TitleLineImg).add($page10TtnImg));
         animation($page10Title2Img, start, start + delta, fadeIn, 'medium');
-        start += delta2;
         animation($page10TitleLineImg, start, start + delta, fadeIn, 'fast');
         animation($page10TalkImg, start, start + delta, swing);
         start += delta2;
@@ -314,11 +304,11 @@
         var $page11BusinessCardRanking = $('.page11-business-card-ranking');
 
         reset($page11FirstLetterImg.add($page11ShareMeetingImg).add($page11BtnImg).add($page11BusinessCardRanking));
-        animation($page11FirstLetterImg, start, start + delta, swing);
+        animation($page11FirstLetterImg, start, start + delta, fadeIn);
         start += delta2;
-        animation($page11ShareMeetingImg, start, start + delta, swing);
+        animation($page11ShareMeetingImg, start, start + delta, fadeIn);
         start += delta2;
-        animation($page11BusinessCardRanking, start, start + delta, swing);
+        animation($page11BusinessCardRanking, start, start + delta, fadeIn);
         start += delta2;
         animation($page11BtnImg, start, start + delta, swing);
     }
