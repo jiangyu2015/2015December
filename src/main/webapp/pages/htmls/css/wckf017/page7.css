@@ -8,6 +8,7 @@
     left: 20px;
     width: 330px;
     height: 555px;
+    z-index: 9;
 }
 
 .page7-title1-img {

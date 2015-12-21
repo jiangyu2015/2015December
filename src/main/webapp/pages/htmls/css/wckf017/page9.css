@@ -7,10 +7,11 @@
     bottom: 0;
     width: 219px;
     height: 510px;
+    z-index: 9;
 }
 
 .page9-talk-img {
-    top:0;
+    top: 0;
     left: 20px;
     width: 599px;
     height: 553px;

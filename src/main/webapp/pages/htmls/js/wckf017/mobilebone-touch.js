@@ -1,3 +1,4 @@
+// 使用zepto
 var webScroll = function () {
     var options = {
         control: true//页面是否循环轮播
@@ -18,18 +19,18 @@ var webScroll = function () {
             touchend: "touchend"
         };
         var startX, startY, x, y;
-        $element.bind(touchEvents.touchstart, function (event) {
-            var touch = event.originalEvent.touches[0];
+        $element.on(touchEvents.touchstart, function (event) {
+            var touch = event.touches[0];
             startX = touch.pageX;
             startY = touch.pageY;
         });
-        $element.bind(touchEvents.touchmove, function (event) {
+        $element.on(touchEvents.touchmove, function (event) {
             event.preventDefault();
-            var touch = event.originalEvent.touches[0];
+            var touch = event.touches[0];
             x = touch.pageX - startX;
             y = touch.pageY - startY;
         });
-        $element.bind(touchEvents.touchend, function (event) {
+        $element.on(touchEvents.touchend, function (event) {
             var currentPage;
             if (Math.abs(x) < Math.abs(y)) {
                 if (y < 0) {
@@ -64,7 +65,7 @@ var webScroll = function () {
         if (index + 1 < len) {
             index = index + 1;
         } else {
-            index = 0;
+            return -1;
         }
         var pageIn = $pages[index];
         Mobilebone.transition(pageIn, $pageOut[0], false, {
