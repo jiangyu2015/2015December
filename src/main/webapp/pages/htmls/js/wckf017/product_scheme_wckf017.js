@@ -333,8 +333,8 @@
                     }
                     $div.append($cell1[0]).append($cell2[0]).append($cell3[0]).append($cell4[0]);
                     $page11CardRatingList.append($div[0]);
+                    toCardLink($cell2, ranking);
                 }
-                //console.log(rankingList);
             }
         });
 
@@ -350,6 +350,11 @@
     page1Animation();
     showFlags[0] = true;
     //page11Animation();
+    function toCardLink($ele, ranking) {
+        $ele.tap(function () {
+            location.href = 'http://uu.ttsales.cn/ttsales-web/sub/businessCardView/init.do?memberId=' + ranking.memberId;
+        });
+    }
 }();
 
 
