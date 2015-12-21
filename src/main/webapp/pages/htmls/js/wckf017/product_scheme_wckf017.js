@@ -220,9 +220,13 @@
         animation($page5PeopleSweatImg, start, start + delta, bounce, true);
         start += delta;
         animation($page5RedLineImg, start, start + delta, slideInDown);
+        start += delta2;
         animation($page5Red1Img, start, start + delta, slideInDown);
+        start += delta2;
         animation($page5Red2Img, start, start + delta, slideInDown);
+        start += delta2;
         animation($page5Red3Img, start, start + delta, slideInDown);
+        start += delta2;
         animation($page5Red4Img, start, start + delta, slideInDown);
         start += delta;
         animation($page5PeopleTalkImg, start, start + delta, swing, 'slow');
