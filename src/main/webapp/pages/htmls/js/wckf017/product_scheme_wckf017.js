@@ -44,6 +44,7 @@
                 page10Animation();
                 break;
             case 10:
+                $('.logo-footer').remove();
                 page11Animation();
                 break;
             default:
@@ -308,6 +309,34 @@
         var $page11ShareMeetingImg = $('.page11-share-meeting-img');
         var $page11BtnImg = $('.page11-btn-img');
         var $page11BusinessCardRanking = $('.page11-business-card-ranking');
+        var $page11CardRatingList = $('.page11-card-rating-list');
+
+        var url = 'http://10.137.1.121:2341';
+        $.ajax({
+            url: 'http://test.ttsales.cn/ttsales-web/sub/businessCardView/getBusCardRank.do?count=20&url=' + url,
+            type: 'get',
+            //jsonp: "callback",
+            success: function (rankingList) {
+                for (var i = 0; i < rankingList.length; i++) {
+                    var ranking = rankingList[i];
+                    var $cell1 = $('<div>').addClass('cell_1').text(i + 1);
+                    var $cell2 = $('<div>').addClass('cell_2').text('"' + (ranking.title || '') + '" 名片链接');
+                    var $cell3 = $('<div>').addClass('cell_3').text(ranking.readSum);
+                    var $heartImg = $('<img>').attr('src', 'pages/htmls/images/wckf017/11/心-实心.png').addClass('cell-heart-img');
+                    var $cell4 = $('<div>').addClass('cell_4');
+                    var $span = $('<span>').text(ranking.praiseSum).addClass('cell4-praise-sum');
+                    $cell4.append($heartImg[0]).append($span[0]);
+
+                    var $div = $('<div>').addClass('row');
+                    if (i % 2 == 0) {
+                        $div.addClass('row-odd');
+                    }
+                    $div.append($cell1[0]).append($cell2[0]).append($cell3[0]).append($cell4[0]);
+                    $page11CardRatingList.append($div[0]);
+                }
+                //console.log(rankingList);
+            }
+        });
 
         reset($page11FirstLetterImg.add($page11ShareMeetingImg).add($page11BtnImg).add($page11BusinessCardRanking));
         animation($page11FirstLetterImg, start, start + delta, fadeIn);

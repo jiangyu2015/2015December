@@ -2,6 +2,11 @@
     background: url("../../images/wckf017/11/背景.jpg");
 }
 
+#page11 .rt-content {
+    overflow-x: hidden;;
+    overflow-y: auto;
+}
+
 .page11-first-letter-img {
     top: 0;
     left: 57px;
@@ -37,4 +42,69 @@
     left: 190px;
     width: 259px;
     height: 57px;
+}
+
+.page11-card-rating-list {
+    top: 1020px;
+    left: 50px;
+    right: 50px;
+    color: #fff;
+    background-color: #4399bc;
+}
+
+.row {
+    height: 35px;
+    line-height: 35px;
+    margin: 0 auto;
+}
+
+.row:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.row-odd {
+    background: #5AAFCE;
+}
+
+.cell_1, .cell_2, .cell_3, .cell_4 {
+    float: left;
+    text-align: center;
+}
+
+.cell_1, .cell_2, .cell_3 {
+    border-right: 1px solid #fff;
+}
+
+.cell_1 {
+    width: 15%;
+}
+
+.cell_2 {
+    width: 35%;
+}
+
+.cell_3 {
+    width: 20%;
+}
+
+.cell_4 {
+    width: 30%;
+}
+
+.list-head {
+    height: 45px;
+    line-height: 45px;
+    font-size: 20px;
+}
+
+.cell-heart-img {
+    width: 24px;
+    vertical-align: middle;
+}
+
+.cell4-praise-sum {
+    display: inline-block;
+    margin-left: 10px;
 }
