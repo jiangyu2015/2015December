@@ -60,9 +60,9 @@ $(function () {
         }
     });
 
-    var $music = $('<audio>').attr('src', 'pages/htmls/music/music.mp3').attr('loop', true).attr('preload', true);
-    var music = $music[0];
-    $('body').append(music);
+    //var $music = $('<audio>').attr('src', 'pages/htmls/music/music.mp3').attr('loop', true).attr('preload', true);
+    var music = $('#audio').get(0);
+    //$('body').append(music);
     //music.loop = true;
     music.play();
     var animationCss = {
