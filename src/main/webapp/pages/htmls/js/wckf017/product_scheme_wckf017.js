@@ -310,6 +310,7 @@
         animation($page10TalkImg, start, start + delta, swing);
         start += delta2;
         animation($page10TtnImg, start, start + delta, swing);
+        toMyCardLink($page10TtnImg);
     }
 
     function page11Animation() {
