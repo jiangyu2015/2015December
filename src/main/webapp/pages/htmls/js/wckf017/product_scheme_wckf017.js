@@ -53,6 +53,7 @@ $(function () {
     });
 
     var music = document.getElementById('audio');
+    music.loop = true;
     music.play();
     var animationCss = {
         common: {
@@ -177,8 +178,9 @@ $(function () {
         var $page3Red1Img = $('.page3-red1-img');
         var $page3Red2Img = $('.page3-red2-img');
         var $page3Red3Img = $('.page3-red3-img');
+        var $page3Red4Img = $('.page3-red4-img');
 
-        reset($page3LineImg.add($page3Talk1Img).add($page3Talk2Img).add($page3Red1Img).add($page3Red2Img).add($page3Red3Img));
+        reset($page3LineImg.add($page3Talk1Img).add($page3Talk2Img).add($page3Red1Img).add($page3Red4Img).add($page3Red2Img).add($page3Red3Img));
         animation($page3Talk1Img, start, start + delta, beat);
         start += delta;
         animation($page3Talk2Img, start, start + delta, beat);
@@ -188,6 +190,8 @@ $(function () {
         animation($page3Red1Img, start, start + delta, swing);
         start += delta;
         animation($page3Red3Img, start, start + delta, swing);
+        start += delta;
+        animation($page3Red4Img, start, start + delta, swing);
         start += delta;
         animation($page3Red2Img, start, start + delta, swing);
     }
