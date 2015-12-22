@@ -72,7 +72,7 @@ $(function () {
 
         var second = cssEffect[cssOpt.frequency] || animationCss['common'].medium;
         var cssText = cssOpt.name + ' ' + second + 's';
-        if (cssOpt.frequency) {
+        if (cssOpt.infinite) {
             cssText += ' infinite';
         }
         if (time) {
@@ -90,24 +90,24 @@ $(function () {
         });
     }
 
-    function swing($ele, time, frequency) {
-        animate($ele, {frequency: frequency, name: 'swing'}, time);
+    function swing($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'swing', infinite: infinite}, time);
     }
 
-    function bounce($ele, time, frequency) {
-        animate($ele, {frequency: frequency, name: 'bounce'}, time);
+    function bounce($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'bounce', infinite: infinite}, time);
     }
 
-    function fadeIn($ele, time, frequency) {
-        animate($ele, {frequency: frequency, name: 'fadeIn'}, time);
-    }
-
-    // 拍打
-    function beat($ele, time, frequency) {
-        animate($ele, {frequency: frequency, name: 'zoomOut'}, time);
+    function fadeIn($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'fadeIn', infinite: infinite}, time);
     }
 
     // 拍打
+    function beat($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'zoomOut', infinite: infinite}, time);
+    }
+
+    // 下落
     function slideInDown($ele, time, frequency) {
         animate($ele, {frequency: frequency, name: 'slideInDown'}, time);
     }
@@ -127,7 +127,11 @@ $(function () {
                 'display': 'block'
             });
             if (callback) {
-                callback($ele, 0, frequency);
+                if (typeof callback == 'object') {
+                    callback.animation($ele, 0, callback.frequency, callback.infinite);
+                } else {
+                    callback($ele, 0, frequency, !!frequency);
+                }
             }
         }, end);
     }
@@ -233,15 +237,15 @@ $(function () {
         start += delta;
         animation($page5PeopleSweatImg, start, start + delta, bounce, true);
         start += delta;
-        animation($page5RedLineImg, start, start + delta, slideInDown);
-        start += delta2;
-        animation($page5Red1Img, start, start + delta, slideInDown);
-        start += delta2;
-        animation($page5Red2Img, start, start + delta, slideInDown);
-        start += delta2;
-        animation($page5Red3Img, start, start + delta, slideInDown);
-        start += delta2;
-        animation($page5Red4Img, start, start + delta, slideInDown);
+        animation($page5RedLineImg, start, start + delta, {animation: slideInDown});
+        start += delta;
+        animation($page5Red1Img, start, start + delta, {animation: slideInDown, frequency: 'fast'});
+        start += delta;
+        animation($page5Red2Img, start, start + delta, {animation: slideInDown, frequency: 'fast'});
+        start += delta;
+        animation($page5Red3Img, start, start + delta, {animation: slideInDown, frequency: 'fast'});
+        start += delta;
+        animation($page5Red4Img, start, start + delta, {animation: slideInDown, frequency: 'fast'});
         start += delta;
         animation($page5PeopleTalkImg, start, start + delta, swing, 'slow');
         start += delta;
