@@ -265,7 +265,7 @@
 				if (index) {
 					page.addEventListener(animateEventName, function() {
 						if (this.classList.contains("in") == false) {
-							this.style.display = "none";
+							this.style.visibility = "hidden";
 							// add on v2.5.5
 							// move here on v2.5.8
 							// main for remove page is just current page
@@ -299,7 +299,7 @@
 				// reflow
 				pageOut.offsetWidth = pageOut.offsetWidth;
 				// go, go, go
-				pageOut.style.display = "block";
+				pageOut.style.visibility = "visible";
 				pageOut.classList.add("out");
 				pageOut.classList.remove("in");
 				// if reverse direction
@@ -378,7 +378,7 @@
 			// reflow for fixing issues #80, #86
 			pageInto.offsetWidth = pageInto.offsetWidth;
 			// go~ as normal
-			pageInto.style.display = "block";
+			pageInto.style.visibility = "visible";
 			pageInto.classList.remove("out");
 			pageInto.classList.add("in");
 			// if reverse direction
@@ -860,7 +860,7 @@
 			}
 		}
 		// show loading
-		ele_mask.style.display = "block";
+		ele_mask.style.visibility = "visible";
 
 		// ajax request
 		var xhr = new XMLHttpRequest();
@@ -913,21 +913,21 @@
 			params.complete.call(params, xhr, xhr.status);
 
 			// hide loading
-			ele_mask.style.display = "none";
+			ele_mask.style.visibility = "hidden";
 		}
 
 		xhr.onerror = function(e) {
 			params.message = "Illegal request address or an unexpected network error!";
 			params.error.call(params, xhr, xhr.status);
 			// hide loading
-			ele_mask.style.display = "none";
+			ele_mask.style.visibility = "hidden";
 		}
 
 		xhr.ontimeout = function() {
 			params.message = "The request timeout!";
 			params.error.call(params, xhr, xhr.status);
 			// hide loading
-			ele_mask.style.display = "none";
+			ele_mask.style.visibility = "hidden";
 		};
 
 		// set request header for server
@@ -1140,7 +1140,7 @@
 
 		// if mask element exist and displaying, prevent double trigger
 		var ele_mask = target.getElementsByClassName(Mobilebone.classMask)[0];
-		if (ele_mask && ele_mask.style.display != "none") {
+		if (ele_mask && ele_mask.style.visibility != "hidden") {
 			event.preventDefault();
 			return false;
 		}
