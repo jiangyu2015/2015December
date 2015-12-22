@@ -23,12 +23,12 @@ var webScroll = function () {
         $element.on(touchEvents.touchstart, function (event) {
             var top = $('#page11').find('.rt-content').scrollTop();
             pageScroll = (top != 0 && currentPage == 10);
-            var touch = event.touches[0];
+            var touch = event.originalEvent.touches[0];
             startX = touch.pageX;
             startY = touch.pageY;
         });
         $element.on(touchEvents.touchmove, function (event) {
-            var touch = event.touches[0];
+            var touch = event.originalEvent.touches[0];
             x = touch.pageX - startX;
             y = touch.pageY - startY;
             if (currentPage != 10) {

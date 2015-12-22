@@ -60,11 +60,9 @@ $(function () {
         }
     });
 
-    //var $music = $('<audio>').attr('src', 'pages/htmls/music/music.mp3').attr('loop', true).attr('preload', true);
-    //var music = $('#audio').get(0);
-    //$('body').append(music);
-    //music.loop = true;
-    //music.play();
+    weixin.ready(function () {
+
+    });
     var animationCss = {
         common: {
             fast: '.4',
@@ -386,7 +384,7 @@ $(function () {
     }
 
     function toCardLink($ele, url) {
-        $ele.tap(function () {
+        $ele.click(function () {
             location.href = url;
         });
     }
