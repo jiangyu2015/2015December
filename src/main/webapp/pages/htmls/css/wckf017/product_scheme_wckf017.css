@@ -23,9 +23,22 @@
     width: 25px;
 }
 
+.scroll-down-icon {
+    -webkit-animation: moveIconDown ease 1.5s both infinite;
+    animation: moveIconDown ease 1.5s both infinite;
+}
+
 .pt-page-moveIconUp {
     -webkit-animation: moveIconUp ease 1.5s both infinite;
     animation: moveIconUp ease 1.5s both infinite;
+}
+
+.hidden {
+    display: none;
+}
+
+.fixed {
+    position: fixed;
 }
 
 .absolute {
@@ -35,6 +48,13 @@
 img {
     width: 100%;
     height: 100%;
+}
+
+.scroll-down-tip-icon {
+    margin: 0 auto;
+    width: 25px;
+    height: 17px;
+    bottom: 20px;
 }
 
 @-webkit-keyframes zoomOut {
@@ -150,6 +170,39 @@ img {
         opacity: 1;
     }
     100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes moveIconDown {
+    100% {
+        -webkit-transform: translateY(100%);
+        opacity: 0;
+    }
+    50% {
+        -webkit-transform: translateY(0%);
+        opacity: 1;
+    }
+    0% {
+        -webkit-transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes moveIconDown {
+    100% {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    50% {
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    0% {
         -webkit-transform: translateY(-100%);
         transform: translateY(-100%);
         opacity: 0;

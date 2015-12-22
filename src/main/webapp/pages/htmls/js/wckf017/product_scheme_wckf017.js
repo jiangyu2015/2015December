@@ -6,7 +6,16 @@ $(function () {
     var pages = webScroll.init({control: false});
     var start = 0, delta = 500, delta2 = delta * 2;
     var showFlags = {};
+    var $pageUpArrow = $('.page-up-arrow');
+    var $scrollDownArrow = $('.scroll-down-arrow');
     pages.on(function (pageIndex) {
+        if (pageIndex == 10) {
+            $scrollDownArrow.removeClass('hidden');
+            $pageUpArrow.addClass('hidden');
+        } else {
+            $pageUpArrow.removeClass('hidden');
+            $scrollDownArrow.addClass('hidden');
+        }
         if (showFlags[pageIndex]) {
             return;
         }
@@ -44,7 +53,6 @@ $(function () {
                 page10Animation();
                 break;
             case 10:
-                $('.logo-footer').remove();
                 page11Animation();
                 break;
             default:
