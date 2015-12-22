@@ -1,7 +1,7 @@
 /**
  * jiangyukun on 2015/12/18.
  */
-+function () {
+$(function () {
     'use strict';
     var pages = webScroll.init({control: false});
     var start = 0, delta = 500, delta2 = delta * 2;
@@ -52,6 +52,8 @@
         }
     });
 
+    var music = document.getElementById('audio');
+    music.play();
     var animationCss = {
         common: {
             fast: '.4',
@@ -370,7 +372,7 @@
             location.href = url;
         });
     }
-}();
+});
 
 
 // (var \$\w*)-(\w*)-(\w*)
