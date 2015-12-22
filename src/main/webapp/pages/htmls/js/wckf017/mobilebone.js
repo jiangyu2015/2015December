@@ -265,13 +265,13 @@
 				if (index) {
 					page.addEventListener(animateEventName, function() {
 						if (this.classList.contains("in") == false) {
-							this.style.visibility = "hidden";
+							this.style.display = "none";
 							// add on v2.5.5
 							// move here on v2.5.8
 							// main for remove page is just current page
 							if (this.removeSelf == true) {
-								this.parentElement.removeChild(this);	
-								this.removeSelf = null;		
+								this.parentElement.removeChild(this);
+								this.removeSelf = null;
 							}
 						}
 						this.classList.remove(params(this).form);
@@ -284,14 +284,14 @@
 					});
 				} else if (typeof animition == "function") {
 					page.addEventListener(animateEventName, function() {
-						animition.call(data.root, this, this.classList.contains("in")? "into": "out", options);	
+						animition.call(data.root, this, this.classList.contains("in")? "into": "out", options);
 					});
 				}
 				// set a flag
 				page.flagAniBind = true;
 			});
 		};
-		
+
 		if (pageOut != null && pageOut.classList) {
 			// do transition if there are no 'prevent'
 			if (isPreventOut != true) {
@@ -299,33 +299,33 @@
 				// reflow
 				pageOut.offsetWidth = pageOut.offsetWidth;
 				// go, go, go
-				pageOut.style.visibility = "visible";
+				pageOut.style.display = "block";
 				pageOut.classList.add("out");
 				pageOut.classList.remove("in");
 				// if reverse direction
 				pageOut.classList[back? "add": "remove"]("reverse");
-				
+
 				// add on v2.5.5
 				pageOut.removeSelf = pageOut.removeSelf || null;
-				
+
 				// set animation callback for 'pageInto'
 				// for issues #153
 				fun_animationCall(pageOut, params_out);
-				
+
 				// do fallback every time
 				var fallback = params_out.fallback;
 				if (typeof fallback == "string") fallback = params_out.root[fallback];
 				if (typeof fallback == "function") fallback.call(params_out.root, pageInto, pageOut, options);
 			}
 		}
-		
-		if (pageInto != null && pageInto.classList) {				
+
+		if (pageInto != null && pageInto.classList) {
 			// for title change
-			var title = params_in.title, 
-			    header = document.querySelector("h1"), 
-			    first_page = document.querySelector("." + this.classPage);	
-				
-			// do title change	
+			var title = params_in.title,
+			    header = document.querySelector("h1"),
+			    first_page = document.querySelector("." + this.classPage);
+
+			// do title change
 			if (title && options.title !== false) {
 				document.title = title;
 				if (header) {
@@ -336,16 +336,16 @@
 				// set data-title for first visibie page
 				pageInto.setAttribute("data-title", document.title);
 			}
-						
+
 			// delete page with same id when options.remove !== false
 			var pageid = options.id || pageInto.id, hashid = options.id || pageInto.id;
-			
+
 			if (options.id) {
 				// eg. get 'ajax.php' from 'ajax.php?xx=1'
 				pageid = pageid.split("?")[0];
 			}
 			var relid = store["_" + pageid];
-			
+
 			if (options.remove !== false && store[pageid] && store[pageid] != pageInto) {
 				// hashid may store the same page, we should delete also
 				// when data-reload not 'false' or null
@@ -354,31 +354,31 @@
 					delete store[relid];
 					delete store["_" + pageid];
 				}
-				
-				// below commented on v2.6.2	
+
+				// below commented on v2.6.2
 				//if (options.reload == true) {
 					// v2.5.8 for issues #147
 					//pageInto.removeSelf = true;
 				//}
-				
+
 				if (store[pageid] != pageOut) {
-					store[pageid].parentElement && store[pageid].parentElement.removeChild(store[pageid]);					
+					store[pageid].parentElement && store[pageid].parentElement.removeChild(store[pageid]);
 				} else {
 					// if the page element same as store
 					// remove when animationend
 					pageOut.removeSelf = true;
 				}
 				delete store[pageid];
-			}	
-			
-			
+			}
+
+
 			// do transition
 			if (pageOut) pageInto.classList.add(params_in.form);
-			// iOS bug 
+			// iOS bug
 			// reflow for fixing issues #80, #86
 			pageInto.offsetWidth = pageInto.offsetWidth;
 			// go~ as normal
-			pageInto.style.visibility = "visible";
+			pageInto.style.display = "block";
 			pageInto.classList.remove("out");
 			pageInto.classList.add("in");
 			// if reverse direction
@@ -397,14 +397,14 @@
 				// capture form submit
 				slice.call(pageInto.querySelectorAll("form")).forEach(function(form) {
 					Mobilebone.submit(form);
-				});	
-				
+				});
+
 				pageInto.firstintoBind = true;
 			}
-			
+
 			// set animation callback for 'pageInto'
 			fun_animationCall(pageInto, params_in);
-			
+
 			// history
 			// hashid should a full url address
 			// different with pageid
@@ -414,8 +414,8 @@
 				url_push = "#" + url_push;
 			}
 			//url_push_replaced = url_push.replace(/^#/, "#&");
-			
-			if (supportHistory && this.pushStateEnabled && options.history !== false && url_push 
+
+			if (supportHistory && this.pushStateEnabled && options.history !== false && url_push
 				// hash should be different
 				// can fix issues #79, #87 maybe
 				&& url_push_replaced != location.hash
@@ -425,37 +425,37 @@
 				// if only pageIn, use 'replaceState'
 				history[pageOut? "pushState": "replaceState"](null, document.title, url_push.replace(/^#/, "#&"));
 			}
-			
+
 			// store page-id, just once
 			if (!store[pageid]) {
 				store[pageid] = pageInto;
-				// when we back/prev, we need to get true 
+				// when we back/prev, we need to get true
 				if (hashid !== pageid) {
 					store[hashid] = pageInto;
 					store["_" + pageid] = hashid;
 				}
 			}
-			
+
 			// do callback every time
 			var callback = params_in.callback;
-			
+
 			if (typeof callback == "string") callback = params_in.root[callback];
 			if (typeof callback == "function") callback.call(params_in.root, pageInto, pageOut, options);
-			
+
 			// Safari do 'popstate' after 'pushState/replaceState'
 			// So, we neet setTimeout to avoid excuting 'Mobilebone.transition()' twice
 			setTimeout(function() {
 				// reset to popable state
-				history.popstate = true;	
+				history.popstate = true;
 			}, 17);
 		}
 	};
-	
-	
+
+
 	/**
 	 * For getting whole ajax url
 	 * In most cases, you are unnecessary to use this function
-	 
+
 	 * @params  trigger: dom-object. element with tag-"a".  - Optional(at least one)
 	            url:     string. ajax url.                  - Optional(at least one)
 			    params:  string|object. ajax params.        - Optional
@@ -519,7 +519,7 @@
 		}
 
 		if (!(href = href || url)) return '';
-		
+
 		// get formdata
 		formdata = formdata || params || "";
 
@@ -527,12 +527,12 @@
 			var arr_data = [];
 			for (key in formdata) {
 				if (!formdata[key].forEach) {
-					formdata[key] = [formdata[key]];					
+					formdata[key] = [formdata[key]];
 				}
 				formdata[key].forEach(function(keyValue) {
-					arr_data.push(key + "=" + encodeURIComponent(keyValue));		
+					arr_data.push(key + "=" + encodeURIComponent(keyValue));
 				});
-				
+
 			}
 			if (arr_data.length > 0) {
 				formdata = arr_data.join("&");
@@ -540,15 +540,15 @@
 				formdata = "";
 			}
 		}
-		
+
 		// get url of root
 		clean_url = href.split("#")[0].replace(/&+$/, "");
 
 		if (clean_url.slice(-1) == "?") {
-			clean_url = clean_url.split("?")[0];	
+			clean_url = clean_url.split("?")[0];
 		}
 		// url = root_url + joiner + formdata
-		if (formdata != "") {						
+		if (formdata != "") {
 			if (/\?/.test(clean_url)) {
 				formdata = formdata.replace(/^&|\?/, "");
 				clean_url = clean_url + "&" + formdata;
@@ -559,10 +559,10 @@
 		}
 		return clean_url;
 	};
-	
+
 	/**
 	 * Create page according to given Dom-element or HTML string. And, notice!!!!! will do transition auto.
-	 
+
 	 * @params  domHtml:        dom-object|string. Create this to dom element as a role of into-page.               - Necessary
 	            eleOrObj: dom-object|object. '.page element', or 'a element', or 'options' for get out-page   - Optional
 				options:            object.            basically, options = ajax options, of course, u can custom it!   - Optional
@@ -579,19 +579,19 @@
 	Mobilebone.createPage = function(domHtml, eleOrObj, options) {
 		var response = null, container = null, classPage = this.classPage, isreload = null;
 		// 'eleOrObj' can '.page element', or 'a element', or 'options'
-		// basically, options = ajax options, of course, u can custom it!		
+		// basically, options = ajax options, of course, u can custom it!
 		if (!domHtml) return;
 		if (typeof options == "undefined" && typeof eleOrObj == "object") {
 			options = eleOrObj;
 		}
 		options = options || {};
-		
+
 		// 'options' that 'Mobilebone.transition()' needs
 		var optionsTransition = {};
-		
+
 		// get page-title from eleOrObj or options
 		var page_title, id_container, classPageInside;
-		
+
 		if (eleOrObj) {
 			if (eleOrObj.nodeType == 1) {
 				// legal elements
@@ -611,38 +611,38 @@
 				}
 				// v2.5.2
 				// is back? for issues #128
-				optionsTransition.back = eleOrObj.getAttribute("data-rel") == "back";	
-				
+				optionsTransition.back = eleOrObj.getAttribute("data-rel") == "back";
+
 				// v2.6.0 history
 				if (eleOrObj.getAttribute("data-history") == "false") {
 					optionsTransition.history = false;
 				}
 			} else {
-				response = eleOrObj.response || options.response;	
+				response = eleOrObj.response || options.response;
 				page_title = eleOrObj.title || options.title;
 				container = eleOrObj.container || options.container;
 				classPageInside = eleOrObj.classPage || options.classPage;
 				optionsTransition.target = eleOrObj.target;
 				// v2.5.2
 				// is back? for issues #128
-				optionsTransition.back = eleOrObj.back || options.back;		
+				optionsTransition.back = eleOrObj.back || options.back;
 			}
-			if (container && classPageInside) classPage = classPageInside;	
+			if (container && classPageInside) classPage = classPageInside;
 		}
-		
+
 		// get current page(will be out) according to 'page_or_child'
 		var current_page = (classPage == classPageInside? container : document).querySelector(".in." + classPage);
 
 		// get create page (will be into) according to 'domHtml'
 		var create_page = null;
-		
+
 		var create = document.createElement("div");
 		if (typeof domHtml == "string") {
 			create.innerHTML = domHtml;
 		} else {
 			create.appendChild(domHtml);
 		}
-		
+
 		// excute inline JavaScript
 		if (Mobilebone.evalScript == true && domHtml.firstintoBind != true) {
 			slice.call(create.getElementsByTagName("script")).forEach(function(originScript) {
@@ -660,9 +660,9 @@
 				originScript = null;
 			});
 		}
-		
+
 		var create_title = create.getElementsByTagName("title")[0];
-		
+
 		// get the page element
 		if (!(create_page = create.querySelector("." + classPage))) {
 			// if there no .page, create as create_page
@@ -672,16 +672,16 @@
 		// set and store title
 		if (typeof page_title == "string") {
 			create_page.setAttribute("data-title", page_title);
-		} else if (create_title && create_title.innerText) { // the judge behind '&&' for issues #144 
+		} else if (create_title && create_title.innerText) { // the judge behind '&&' for issues #144
 			create_page.setAttribute("data-title", create_title.innerText);
 		}
-		
+
 		// do transition
 		optionsTransition.response = response || domHtml;
 		optionsTransition.id = this.getCleanUrl(eleOrObj) || create_page.id || ("unique" + Date.now());
-		
+
 		// 'if' statement below added on v2.0.0
-		if (typeof options == "object") { 
+		if (typeof options == "object") {
 			if (typeof options.history != "undefined") {
 				optionsTransition.history = options.history;
 			}
@@ -699,7 +699,7 @@
 			optionsTransition.history = false;
 			optionsTransition.classPage = classPage;
 		}
-		
+
 		// append to a accurate position
 		container = container || document.body;
 		// 1. if new page, that insert create page as a last-child
@@ -710,18 +710,18 @@
 		} else {
 			container.appendChild(create_page);
 		}
-		
+
 		// release memory
 		create = null;
 
 		// do transition
 		this.transition(create_page, current_page, optionsTransition);
 	};
-	
+
 	/**
-	 * For ajax callback. 
+	 * For ajax callback.
 	 * For example, data-success="a.b.c". We can't use 'a.b.c' as a function, because it's a string. We should do some work to get it!
-	 
+
 	 * @params  keys:        string. - Necessary
 	 * @returns function
 	            undefined keys is not string
@@ -740,13 +740,13 @@
 		}
 		return fun;
 	};
-		
+
 	/**
-	 * For ajax request to get HTML or JSON. 
-	 
-	 * @params  aOrFormOrObj        - Necessary  
+	 * For ajax request to get HTML or JSON.
+
+	 * @params  aOrFormOrObj        - Necessary
 	            1. dom-object:<a>|<form>.
-				2. object.  
+				2. object.
 	 * @returns undefined
 	 * @example Mobilebone.ajax(document.querySelector("a"));
 	            Mobilebone.ajax({
@@ -757,7 +757,7 @@
 	**/
 	Mobilebone.ajax = function(aOrFormOrObj) {
 		if (!aOrFormOrObj) return;
-		
+
 		// default params
 		var defaults = {
 			url: "",
@@ -770,11 +770,11 @@
 			password: "",
 			success: function() {},
 			error: function() {},
-			complete: function() {}	
+			complete: function() {}
 		};
-		
+
 		var params = {}, ele_mask = null, formData = null;
-		
+
 		// if 'aOrFormOrObj' is a element, we should turn it to options-object
 		var params_from_trigger = {}, attr_mask;
 		if (aOrFormOrObj.nodeType == 1) {
@@ -791,18 +791,18 @@
 					}
 				}
 			}
-			
+
 			// address of ajax url
-			params.url = this.getCleanUrl(aOrFormOrObj, params.url);	
+			params.url = this.getCleanUrl(aOrFormOrObj, params.url);
 			params.target = aOrFormOrObj;
 			// v2.5.2
 			// is back? for issues #128
-			params.back = aOrFormOrObj.getAttribute("data-rel") == "back";	
-			
+			params.back = aOrFormOrObj.getAttribute("data-rel") == "back";
+
 			var tagName = aOrFormOrObj.tagName.toLowerCase();
 			if (tagName == "form") {
 				params.type = aOrFormOrObj.method;
-				
+
 				formData = new FormData(aOrFormOrObj);
 			} else if (tagName == "a") {
 				// v2.5.8 for issues #157
@@ -816,7 +816,7 @@
 					params.title = false;
 				}
 			}
-			
+
 			// get mask element
 			attr_mask = aOrFormOrObj.getAttribute("data-mask");
 			if (attr_mask == "true" || attr_mask == "") {
@@ -840,9 +840,9 @@
 			// v2.6.1
 			params.container = aOrFormOrObj.container;
 		} else {
-			return;	
+			return;
 		}
-		
+
 		// do ajax
 		// get mask and loading element
 		var body = container || document.body;
@@ -860,17 +860,17 @@
 			}
 		}
 		// show loading
-		ele_mask.style.visibility = "visible";
-		
+		ele_mask.style.display = "block";
+
 		// ajax request
-		var xhr = new XMLHttpRequest();			
+		var xhr = new XMLHttpRequest();
 		xhr.open(params.type || "GET", params.url + (/\?/.test(params.url)? "&" : "?") + "r=" + Date.now(), params.async, params.username, params.password);
 		xhr.timeout = params.timeout;
-		
+
 		xhr.onload = function() {
 			// so far, many browser hasn't supported responseType = 'json', so, use JSON.parse instead
 			var response = null;
-			
+
 			if (xhr.status == 200) {
 				if (params.dataType == "json" || params.dataType == "JSON") {
 					try {
@@ -883,9 +883,9 @@
 					}
 				} else if (params.dataType == "unknown") {
 					// ajax send by url
-					// no history hush					
+					// no history hush
 					params.history = false;
-					// I don't remember why add 'params.remove = false' here, 
+					// I don't remember why add 'params.remove = false' here,
 					// but it seems that this will cause issues #147
 					// no element remove
 					// del → v2.5.8 // params.remove = false;
@@ -909,46 +909,46 @@
 				params.message = "The status code exception!";
 				params.error.call(params, xhr, xhr.status);
 			}
-			
+
 			params.complete.call(params, xhr, xhr.status);
-			
+
 			// hide loading
-			ele_mask.style.visibility = "hidden";
+			ele_mask.style.display = "none";
 		}
-		
+
 		xhr.onerror = function(e) {
 			params.message = "Illegal request address or an unexpected network error!";
 			params.error.call(params, xhr, xhr.status);
 			// hide loading
-			ele_mask.style.visibility = "hidden";
+			ele_mask.style.display = "none";
 		}
-		
+
 		xhr.ontimeout = function() {
 			params.message = "The request timeout!";
 			params.error.call(params, xhr, xhr.status);
 			// hide loading
-			ele_mask.style.visibility = "hidden";
+			ele_mask.style.display = "none";
 		};
-		
+
 		// set request header for server
 		xhr.setRequestHeader("Type", "ajax");
 		xhr.setRequestHeader("From", "mobilebone");
-		
+
 		xhr.send(formData);
 	};
-	
+
 	/**
 	 * capture form submit events to a ajax request.
-	 
+
 	 * @params  form:        formElement. - Necessary
 	 * @example Mobilebone.form(document.querySelector("form"));
 	 *
 	**/
 	Mobilebone.submit = function(form) {
-		if (!form || typeof form.action != "string") return; 
+		if (!form || typeof form.action != "string") return;
 		var ajax = form.getAttribute("data-ajax");
 		if (ajax == "false" || (Mobilebone.captureForm == false && ajax != "true")) return;
-		
+
 		form.addEventListener("submit", function(event) {
 			// prevent detect
 			var attrPrevent = this.getAttribute("data-preventdefault");
@@ -959,20 +959,20 @@
 				event.preventDefault();
 				return false;
 			}
-			
+
 			Mobilebone.ajax(this);
 			event.preventDefault();
 		});
 	};
-	
-	
+
+
 	/**
 	 * Sometime we don't know direction of transition. Such as browser history change, or data-rel="auto".
 	   In this case, we ensure the direction(back or prev) by the sorts of two pages(into or out)
-	 
-	 * @params  page_in  dom-object      - Necessary  
-	            page_out  dom-object      - Optional 
-				
+
+	 * @params  page_in  dom-object      - Necessary
+	            page_out  dom-object      - Optional
+
 	 * @returns boolean
 	 *
 	**/
@@ -987,42 +987,42 @@
 		if (!page_out) return false;
 		return page_in.compareDocumentPosition(page_out) == 4;
 	};
-	
+
 	/**
-	 * If dataType of ajax is 'json', we can't convert json-data to page-element. 
+	 * If dataType of ajax is 'json', we can't convert json-data to page-element.
 	   So, we export a function names 'jsonHandle' to handle json-data.
 	 * Attention, it's a global interface. If your project has many json call, you should use JSON itself to make a distinction.
 	   For example, every JSON include the only json-id:
 	   {
 		  "id": "homePage" ,
-		  "data": []  
+		  "data": []
 	   }
 	   different with
 	   {
 		  "id": "listPage" ,
-		  "data": []  
+		  "data": []
 	   }
 	 *
-	 * @params  json    - Necessary 		
+	 * @params  json    - Necessary
 	 * @returns dom-object|string
 	 *
 	**/
 	Mobilebone.jsonHandle = function(json) {
 		return '<p style="text-align:center;">Dear master, if you see me, show that JSON parsing function is undefined!</p>';
 	},
-		
+
 	/**
 	 * Initialization. Load page according to location.hash. And bind link-catch events.
 	**/
-	Mobilebone.init = function() {	
+	Mobilebone.init = function() {
 		if (hasInited == true) return 'Don\'t repeat initialization!';
 
 		var hash = location.hash.replace("#&", "#"), ele_in = null, container = null;
-		
+
 		if (hash == "" || hash == "#") {
 			this.transition(document.querySelector("." + this.classPage));
 		} else if (isSimple.test(hash) == true && (ele_in = document.querySelector(hash)) && ele_in.classList.contains(this.classPage)) { // 'ele_in' must be a page element
-			this.transition(ele_in);	
+			this.transition(ele_in);
 		} else {
 			// add on v2.6.1
 			if (hash.split("container=").length == 2) {
@@ -1034,18 +1034,18 @@
 				dataType: "unknown",
 				container: container,
 				error: function() {
-					ele_in = document.querySelector("." + Mobilebone.classPage);	
+					ele_in = document.querySelector("." + Mobilebone.classPage);
 					Mobilebone.transition(ele_in);
 				}
-			});	
+			});
 		}
-		
+
 		// Initialization link-catch events.
 		var $ = root.$ || root.jQuery || root.Zepto;
 		if ($ && $.fn && $.fn.tap && ('ontouchstart' in window == true)) {
 			// for some unknown 'tap' plugin
 			$(document).tap(this.handleTapEvent);
-			
+
 			// zepto tap event.preventDefault can't prevent default click-events
 			document.addEventListener("click", function(event) {
 				var target = event.target;
@@ -1055,7 +1055,7 @@
 				}
 				var ajax = target.getAttribute("data-ajax"), href = target.href;
 				// if not ajax request
-				if (target.getAttribute("data-rel") == "external" 
+				if (target.getAttribute("data-rel") == "external"
 					|| ajax == "false"
 					|| (href.replace("://", "").split("/")[0] !== location.href.replace("://", "").split("/")[0] && ajax != "true")
 					|| (Mobilebone.captureLink == false && ajax != "true")
@@ -1065,42 +1065,42 @@
 					return;
 				}
 				event.preventDefault();
-			});			
+			});
 		} else {
-			document.addEventListener("click", this.handleTapEvent);	
+			document.addEventListener("click", this.handleTapEvent);
 		}
 
-		// Important: 
+		// Important:
 		// In ios7+, swipe the edge of page will navigate Safari
 		// that will trigger 'popstate' events and the page will transition twice
 		var isSafari7 = !!navigator.userAgent.match(/safari/i) && !navigator.userAgent.match(/chrome/i) && typeof document.hidden !== "undefined" && !window.chrome;
 		if ('ontouchstart' in window == true && isSafari7) {
 			document.addEventListener("touchmove", function() {
-				history.popstateswipe = true;	
-			});	
+				history.popstateswipe = true;
+			});
 			document.addEventListener("touchend", function() {
-				history.popstateswipe = false;	
+				history.popstateswipe = false;
 			});
 		}
-		
+
 		// change flag-var for avoiding repeat init
 		hasInited = true;
 	};
-	
+
 	/**
 	 * If 'a' element has href, slide auto when tapping~
 	**/
 	Mobilebone.handleTapEvent = function(event) {
 		/**
-		// iscroll(set tap: true) may cause twice tap problem 
+		// iscroll(set tap: true) may cause twice tap problem
 		// which is none of Mobilebone's business
 		// However, you can let code below go to avoid twice tap in Mobilebone
 		// but the tap event bind out of Mobilebone also has bug
-		// so my advice is that: 
-		// 1. use Date.now to judge as Mobilebone did; 
+		// so my advice is that:
+		// 1. use Date.now to judge as Mobilebone did;
 		// or
 		// 2. keep this code in the form of comment and fixed bug outside
-		if (store.timerTap && Date.now() - store.timerTap < 100) {	
+		if (store.timerTap && Date.now() - store.timerTap < 100) {
 			event.preventDefault();
 			return false;
 		}
@@ -1108,7 +1108,7 @@
 		*/
 		var target = null;
 		// you can pass target as params directly
-		if (event && event.nodeType == 1) { 
+		if (event && event.nodeType == 1) {
 			target = event;
 			target.preventDefault = function() {};
 		}
@@ -1119,16 +1119,16 @@
 		}
 		// the page that current touched or actived
 		var self_page = document.querySelector(".in." + Mobilebone.classPage);
-		
+
 		if (self_page == null || !target) return;
 
 		// optional params for Mobilebone.transition
 		var options = {
-			target: target	
+			target: target
 		};
-		
+
 		// prevent detect
-		var attrPrevent = target.getAttribute("data-preventdefault") 
+		var attrPrevent = target.getAttribute("data-preventdefault")
 			|| _queryToObject(target.getAttribute("data-params") || "").preventdefault;
 		// get 'preventDefault' function
 		var funPrevent = Mobilebone.getFunction(attrPrevent);
@@ -1137,10 +1137,10 @@
 			event.preventDefault();
 			return false;
 		}
-		
+
 		// if mask element exist and displaying, prevent double trigger
 		var ele_mask = target.getElementsByClassName(Mobilebone.classMask)[0];
-		if (ele_mask && ele_mask.style.visibility != "hidden") {
+		if (ele_mask && ele_mask.style.display != "none") {
 			event.preventDefault();
 			return false;
 		}
