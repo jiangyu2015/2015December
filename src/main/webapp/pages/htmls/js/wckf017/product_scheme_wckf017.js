@@ -205,7 +205,7 @@
         animation($page4CloudImg, start, start + delta, swing);
         start += delta;
         animation($page4ButtonImg, start, start + delta, swing);
-        toCardLink($page4ButtonImg, 'http://uu.ttsales.cn/ttsales-web/sub/businessCardNew/init.do');
+        toMyCardLink($page4ButtonImg);
     }
 
     function page5Animation() {
@@ -257,6 +257,7 @@
         animation($page6TalkImg, start, start + delta, swing);
         start += delta;
         animation($page6BtnImg, start, start + delta, swing);
+        toMyCardLink($page6BtnImg);
     }
 
     function page7Animation() {
@@ -318,8 +319,8 @@
         var $page11BusinessCardRanking = $('.page11-business-card-ranking');
         var $page11CardRatingList = $('.page11-card-rating-list');
 
-        var url = 'http://10.137.1.121:2341';
-        //var url = 'http://weiche.jiangyu.site:1220';
+        //var url = 'http://10.137.1.121:2341';
+        var url = 'http://weiche.jiangyu.site:1220';
         $.ajax({
             url: 'http://test.ttsales.cn/ttsales-web/sub/businessCardView/getBusCardRank.do?count=20&url=' + url,
             type: 'get',
@@ -341,7 +342,7 @@
                     }
                     $div.append($cell1[0]).append($cell2[0]).append($cell3[0]).append($cell4[0]);
                     $page11CardRatingList.append($div[0]);
-                    toCardLink($cell2, 'http://uu.ttsales.cn/ttsales-web/sub/businessCardView/init.do?memberId=' + ranking.memberId);
+                    toCardLink($cell2, 'http://test.ttsales.cn/ttsales-web/sub/businessCardView/init.do?memberId=' + ranking.memberId);
                 }
             }
         });
@@ -353,11 +354,16 @@
         animation($page11BtnImg, start, start + delta, swing);
         start += delta;
         animation($page11BusinessCardRanking, start, start + delta, fadeIn);
+        toMyCardLink($page11BtnImg);
     }
 
     page1Animation();
     showFlags[0] = true;
     //page11Animation();
+    function toMyCardLink($myCardBtn) {
+        toCardLink($myCardBtn, 'http://test.ttsales.cn/ttsales-web/sub/businessCardNew/init.do');
+    }
+
     function toCardLink($ele, url) {
         $ele.tap(function () {
             location.href = url;
