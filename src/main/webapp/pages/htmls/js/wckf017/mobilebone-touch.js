@@ -21,7 +21,7 @@ var webScroll = function () {
         };
         var startX, startY, x, y;
         $element.on(touchEvents.touchstart, function (event) {
-            var top = $('#page11').find('.rt-content').scrollTop();
+            var top = $('#page11').find('.page11-scroll-container').scrollTop();
             pageScroll = (top != 0 && currentPage == 10);
             var touch = event.originalEvent.touches[0];
             startX = touch.pageX;

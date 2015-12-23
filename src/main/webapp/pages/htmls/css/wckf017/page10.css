@@ -1,5 +1,9 @@
 #page10 {
-    background: url("../../images/wckf017/10/背景.jpg");
+    background: url("../../images/wckf017/1/背景.jpg");
+}
+
+#page10 .rt-content {
+    overflow: scroll;
 }
 
 .page10-talk-img {
@@ -32,7 +36,7 @@
 
 .page10-btn-img {
     left: 210px;
-    bottom:50px;
+    bottom: 50px;
     width: 226px;
     height: 107px;
 }

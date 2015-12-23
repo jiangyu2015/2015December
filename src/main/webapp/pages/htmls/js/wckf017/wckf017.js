@@ -376,7 +376,7 @@ $(function () {
         toMyCardLink($page11BtnImg);
     }
 
-    page1Animation();
+    page11Animation();
     showFlags[0] = true;
     //page11Animation();
     function toMyCardLink($myCardBtn) {

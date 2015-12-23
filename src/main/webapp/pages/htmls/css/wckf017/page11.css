@@ -1,62 +1,49 @@
 #page11 {
-    background: url("../../images/wckf017/11/背景.jpg");
+    overflow: hidden;
+    background: url("../../images/wckf017/1/背景.jpg");
 }
 
-.page11-scoll-container {
-    overflow-x: hidden;;
-    overflow-y: scroll;
+.page11-scroll-container {
+    position: relative;
+    height: 100%;
+    overflow: scroll;
 }
 
 .page11-first-letter-img {
-    top: 0;
-    left: 57px;
-    width: 525px;
-    height: 29px;
+    top: 10px;
+    left: 8.9%;
+    width: 82%;
 }
 
 .page11-btn-img {
-    top: 50px;
-    left: 207px;
-    width: 226px;
-    height: 107px;
+    top: 40px;
+    left: 32.3%;
+    width: 35.3%;
 }
 
 .page11-share-meeting-img {
-    top: 180px;
-    width: 642px;
-    height: 749px;
+    top: 110px;
+    width: 100%;
 }
-
-/*.page11-heart-img {
-    width: 28px;
-    height: 25px;
-}
-
-.page11-solid-heart-img {
-    width: 24px;
-    height: 21px;
-}*/
-
 
 .page11-business-card-ranking {
-    top: 960px;
-    left: 190px;
-    width: 259px;
-    height: 57px;
+    top: 540px;
+    left: 29.68%;
+    width: 40.5%;
 }
 
 .page11-card-rating-list {
-    top: 1020px;
-    left: 20px;
-    right: 20px;
+    top: 580px;
+    left: 1%;
+    right: 1%;
     color: #fff;
     background-color: #4399bc;
 }
 
 .row {
-    height: 50px;
-    line-height: 50px;
-    font-size: 20px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 12px;
     margin: 0 auto;
 }
 
@@ -98,14 +85,13 @@
 }
 
 .list-head {
-    height: 60px;
-    line-height: 60px;
-    font-size: 25px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
 }
 
 .cell-heart-img {
-    width: 24px;
-    height: 21px;
+    width: 16px;
     vertical-align: middle;
 }
 
