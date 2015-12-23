@@ -2,9 +2,9 @@
     background: url("../../images/wckf017/11/背景.jpg");
 }
 
-#page11 .rt-content {
+.page11-scoll-container {
     overflow-x: hidden;;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .page11-first-letter-img {
@@ -105,6 +105,7 @@
 
 .cell-heart-img {
     width: 24px;
+    height: 21px;
     vertical-align: middle;
 }
 

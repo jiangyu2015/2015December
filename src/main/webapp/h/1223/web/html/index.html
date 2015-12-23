@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>票面上传-副本</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- 插件 -->
+    <link rel="stylesheet" href="../css/zyupload-1.0.0.min.css" type="text/css">
+    <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../js/zyupload/zyupload.basic-1.0.0.min.js"></script>
+    <style>
+        input[disabled] {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap bg_gray">
+    <div class="header">
+        <a href="javascript:void(0);" class="goTo"></a>
+        <span>票面上传-副本</span>
+    </div>
+    <div class="main">
+        <div id="mask-pic" style="display: none;">
+            <a href="javascript:void(0);" class="swipe-pre"></a>
+            <img src="../images/index-icon_06.png"/><span></span>
+            <a href="javascript:void(0);" class="swipe-next"></a>
+            <div class="mask-bg"></div>
+        </div>
+
+        <form action="">
+            <div id="zyupload" class="zyupload"></div>
+            <div class="submitBtn">
+                <input id="submit" type="submit" value="提交" disabled/>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        // 初始化插件
+        $("#zyupload").zyUpload({
+            width: "650px",                 // 宽度
+            height: "400px",                 // 宽度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "/upload/UploadAction",  // 上传文件的路径
+            fileType: ["jpg", "png", "js", "exe"],// 上传文件的类型
+            fileSize: 51200000,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: false,                   // 是否可以拖动上传文件
+            tailor: false,                   // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: false,  				  // 是否在上传文件完成后删除预览
+            /* 外部获得的回调接口 */
+            onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                console.info("当前选择了以下文件：");
+                console.info(selectFiles);
+
+
+            },
+            onDelete: function (file, files) {              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                console.info("当前删除了此文件：");
+                console.info(file.name);
+            },
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+                console.info("此文件上传成功：");
+                console.info(file.name);
+                console.info("此文件上传到服务器地址：");
+                console.info(response);
+                $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                console.info("此文件上传失败：");
+                console.info(file.name);
+            },
+            onComplete: function (response) {           	  // 上传完成的回调方法
+                console.info("文件上传完成");
+                console.info(response);
+            }
+        });
+
+        var currentImg = null;
+        $(".swipe-next").click(function () {//下一张
+            var nextImg = currentImg.closest(".upload_append_list").next(".upload_append_list").find("img");
+            if (nextImg.length > 0) {
+                currentImg = nextImg;
+                $("#mask-pic img").attr("src", nextImg.attr("src"));
+            } else {
+                alert("最后一张");
+                $(".swipe-next").addClass("disabled");
+            }
+        });
+
+        $(".swipe-pre").click(function () {//上一张要做边界判断
+            var preImg = currentImg.closest(".upload_append_list").prev(".upload_append_list").find("img");
+            if (preImg.length > 0) {
+                currentImg = preImg;
+                $("#mask-pic img").attr("src", preImg.attr("src"));
+            } else {
+                alert("最后一张");
+                $(".swipe-pre").addClass("disabled");
+            }
+        });
+
+        $("#zyupload").delegate(".upload_append_list img", "click", function () {
+            currentImg = $(this);
+            $("#mask-pic img").attr('src', $(this).attr('src'));
+            $("#mask-pic").css("display", "table-cell");//显示原图
+            $(".mask-bg").click(function () {
+                $("#mask-pic").css("display", "none");//关闭显示原图
+            });
+        });
+        $(".upload_btn").after('<a href="" class="help-link">请同事帮我</a>');
+
+        $(".upload_btn").click(function () {
+            if ($('#preview .upload_append_list').length != 0) {
+                $('#submit').prop('disabled', false);
+            } else {
+                $('#submit').prop('disabled', true);
+            }
+        });
+
+
+    });
+
+</script>
+</body>
+</html>
