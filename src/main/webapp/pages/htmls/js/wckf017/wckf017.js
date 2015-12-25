@@ -7,14 +7,11 @@ $(function () {
     var start = 0, delta = 500, delta2 = delta * 2;
     var showFlags = {};
     var $pageUpArrow = $('.page-up-arrow');
-    var $scrollDownArrow = $('.scroll-down-arrow');
     pages.on(function (pageIndex) {
         if (pageIndex == 10) {
-            $scrollDownArrow.removeClass('hidden');
-            $pageUpArrow.addClass('hidden');
-        } else {
-            $pageUpArrow.removeClass('hidden');
-            $scrollDownArrow.addClass('hidden');
+            setTimeout(function () {
+                $pageUpArrow.addClass('hidden');
+            }, 7000);
         }
         if (showFlags[pageIndex]) {
             return;
@@ -60,9 +57,6 @@ $(function () {
         }
     });
 
-    weixin.ready(function () {
-
-    });
     var animationCss = {
         common: {
             fast: '.4',
@@ -71,6 +65,13 @@ $(function () {
             animation: 'swing .5s'
         }
     };
+
+    function setCssAnimation($ele, animationValue) {
+        $ele.css({
+            animation: animationValue,
+            '-webkit-animation': animationValue
+        });
+    }
 
     function animate($ele, cssOpt, time) {
         if (cssOpt.frequency == true) {
@@ -85,17 +86,11 @@ $(function () {
         }
         if (time) {
             setTimeout(function () {
-                $ele.css({
-                    animation: cssText,
-                    '-webkit-animation': cssText
-                });
+                setCssAnimation($ele, cssText);
             }, time);
             return;
         }
-        $ele.css({
-            animation: cssText,
-            '-webkit-animation': cssText
-        });
+        setCssAnimation($ele, cssText);
     }
 
     function swing($ele, time, frequency, infinite) {
@@ -116,14 +111,26 @@ $(function () {
     }
 
     // 下落
-    function slideInDown($ele, time, frequency) {
-        animate($ele, {frequency: frequency, name: 'slideInDown'}, time);
+    function slideInDown($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'slideInDown', infinite: infinite}, time);
+    }
+
+    function rotateIn($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'rotateIn', infinite: infinite}, time);
+    }
+
+    function rotateOut($ele, time, frequency, infinite) {
+        animate($ele, {frequency: frequency, name: 'rotateOut', infinite: infinite}, time);
     }
 
     function reset($elements) {
         $elements.css({
             'display': 'none'
         });
+    }
+
+    function clearAnimation($targets) {
+        setCssAnimation($targets, 'none');
     }
 
     function animation($ele, start, end, callback, frequency) {
@@ -338,33 +345,28 @@ $(function () {
         var $page11BusinessCardRanking = $('.page11-business-card-ranking');
         var $page11CardRatingList = $('.page11-card-rating-list');
 
-        //var url = 'http://10.137.1.121:2341';
-        var url = 'http://weiche.jiangyu.site:1220';
-        $.ajax({
-            url: 'http://test.ttsales.cn/ttsales-web/sub/businessCardView/getBusCardRank.do?count=20&url=' + url,
-            type: 'get',
-            //jsonp: "callback",
-            success: function (rankingList) {
-                for (var i = 0; i < rankingList.length; i++) {
-                    var ranking = rankingList[i];
-                    var $cell1 = $('<div>').addClass('cell_1').text(i + 1);
-                    var $cell2 = $('<div>').addClass('cell_2').text('"' + (ranking.title || '') + '" 名片链接');
-                    var $cell3 = $('<div>').addClass('cell_3').text(ranking.readSum);
-                    var $heartImg = $('<img>').attr('src', 'pages/htmls/images/wckf017/11/心-实心.png').addClass('cell-heart-img');
-                    var $cell4 = $('<div>').addClass('cell_4');
-                    var $span = $('<span>').text(ranking.praiseSum).addClass('cell4-praise-sum');
-                    $cell4.append($heartImg[0]).append($span[0]);
-
-                    var $div = $('<div>').addClass('row');
-                    if (i % 2 == 0) {
-                        $div.addClass('row-odd');
-                    }
-                    $div.append($cell1[0]).append($cell2[0]).append($cell3[0]).append($cell4[0]);
-                    $page11CardRatingList.append($div[0]);
-                    toCardLink($cell2, 'http://test.ttsales.cn/ttsales-web/sub/businessCardView/init.do?memberId=' + ranking.memberId);
+        //var url = 'http://10.137.1.121';
+        var test = false;
+        var url = 'http://uu.ttsales.cn';
+        if (test) {
+            var rankings = [];
+            rankings.push({
+                title: 'xx',
+                memberId: '',
+                praiseSum: '11',
+                readSum: '11'
+            });
+            rankingList($page11CardRatingList, rankings);
+        } else {
+            $.ajax({
+                url: 'http://uu.ttsales.cn/ttsales-web/sub/businessCardView/getBusCardRank.do?count=50&url=' + url,
+                type: 'get',
+                //jsonp: "callback",
+                success: function (rankings) {
+                    rankingList($page11CardRatingList, rankings);
                 }
-            }
-        });
+            });
+        }
 
         reset($page11FirstLetterImg.add($page11ShareMeetingImg).add($page11BtnImg).add($page11BusinessCardRanking));
         animation($page11FirstLetterImg, start, start + delta, fadeIn);
@@ -376,11 +378,11 @@ $(function () {
         toMyCardLink($page11BtnImg);
     }
 
-    page11Animation();
+    page1Animation();
     showFlags[0] = true;
     //page11Animation();
     function toMyCardLink($myCardBtn) {
-        toCardLink($myCardBtn, 'http://test.ttsales.cn/ttsales-web/sub/businessCardNew/init.do');
+        toCardLink($myCardBtn, 'http://uu.ttsales.cn/ttsales-web/sub/businessCardNew/init.do');
     }
 
     function toCardLink($ele, url) {
@@ -388,6 +390,53 @@ $(function () {
             location.href = url;
         });
     }
+
+    function rankingList($rankingContainer, rankingList) {
+        for (var i = 0; i < rankingList.length; i++) {
+            var ranking = rankingList[i];
+            var $cell1 = $('<div>').addClass('cell_1').text(i + 1);
+            var title = (ranking.title || '');
+            if (title.length > 8) {
+                title = title.substr(0, 7) + '...';
+            }
+            var $cardLink = $('<div>').addClass('text-underline').text('"' + title + '"');
+            var $cell2 = $('<div>').addClass('cell_2').append($cardLink);
+            var $cell3 = $('<div>').addClass('cell_3').text(ranking.readSum);
+            var $heartImg = $('<img>').attr('src', 'http://static.ttsales.cn/ttsales-cms/pages/htmls/images/wckf017/11/心-实心.png').addClass('cell-heart-img');
+            var $cell4 = $('<div>').addClass('cell_4');
+            var $span = $('<span>').text(ranking.praiseSum).addClass('cell4-praise-sum');
+            $cell4.append($heartImg[0]).append($span[0]);
+
+            var $div = $('<div>').addClass('row');
+            if (i % 2 == 0) {
+                $div.addClass('row-odd');
+            }
+            $div.append($cell1[0]).append($cell2[0]).append($cell3[0]).append($cell4[0]);
+            $rankingContainer.append($div[0]);
+            toCardLink($cell2, 'http://uu.ttsales.cn/ttsales-web/sub/businessCardView/init.do?memberId=' + ranking.memberId);
+        }
+    }
+
+    function musicControl() {
+        var $musicOff = $('.music-off');
+        var $music = $('#audio');
+        var music = $music[0];
+        var musicFlag = true;
+        animation($musicOff, 0, delta, rotateOut, 'slow');
+        music.play();
+        $musicOff.on('touchend', function () {
+            if (musicFlag) {
+                clearAnimation($musicOff);
+                music.pause();
+            } else {
+                music.play();
+                animation($musicOff, 0, delta, rotateOut, 'slow');
+            }
+            musicFlag = !musicFlag;
+        });
+    }
+
+    musicControl();
 });
 
 

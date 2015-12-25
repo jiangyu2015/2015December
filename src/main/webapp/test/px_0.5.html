@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=1">
+    <title>0.5px</title>
+    <script src="../res/js/jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 48px;
+        }
+
+        .font16px {
+            font-size: 16px;
+        }
+
+        .div1 {
+            margin: 1rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid #aaa;
+        }
+    </style>
+</head>
+<body>
+<div class="div1 font16px">
+    <span>xx</span>
+</div>
+<script>
+    //    console.log(devicePixelRatio);
+    function adapter() {
+        var i, dpr = devicePixelRatio;
+        var metas = document.getElementsByTagName('meta');
+        for (i = 0; i < metas.length; i++) {
+            var meta = metas[i];
+            if (meta.name == 'viewport') {
+                var scale = 1 / dpr;
+                meta.content = 'width=device-width, initial-scale=' + scale + ', maximum-scale=' + scale + ', user-scalable=' + scale;
+            }
+        }
+
+        $('html').attr('data-dpr', dpr);
+        $('body').attr('data-dpr', dpr);
+        var html = document.getElementsByTagName('html')[0];
+        var body = document.getElementsByTagName('body')[0];
+        html.style.fontSize = 12 * dpr + 'px';
+        body.style.fontSize = 12 * dpr + 'px';
+
+        for (i = 12; i < 30; i++) {
+            $('.font' + i + 'px').css({
+                'font-size': i * dpr + 'px'
+            });
+        }
+    }
+    adapter();
+
+    //    var cssList = document.styleSheets;
+    //    console.log(cssList);
+
+
+</script>
+</body>
+</html>
