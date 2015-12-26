@@ -11,36 +11,28 @@ define("carBabyView", ["require"], function () {
         var centerX = context.centerX;
         var centerY = context.centerY;
         var radius = 50;
-        var padding = 0.1;
+        var padding = 0.02;
 
         var shapeContainer = {};
-        /*var circle = shapeContainer.circle = new CircleShape({
-            zlevel: 0,
-            style: {
-                x: centerX,
-                y: centerY,
-                r: radius,
-                brushType: 'stroke',
-                strokeColor: 'rgba(106, 205, 240, 0.8)',
-                lineWidth: 30
-            },
-            hoverable: false
-        });*/
 
         var sectors = [];
         var startAngle = 0;
         var angle = PI2 / 8;
+        var textList = ['', '油耗', '', '里程', '', '', '', '费用'];
         for (var i = 0; i < 8; i++) {
+            var transparency = 1 - i * 0.1;
+            var endAngle = startAngle + angle - padding;
             var sector = sectors[i] = new CellularShape({
                 zlevel: 0,
                 style: {
                     x: centerX,
                     y: centerY,
                     startAngle: startAngle + padding,
-                    endAngle: startAngle + angle - padding,
-                    colorStyle: 'rgba(106, 205, 240, 0.8)',
-                    borderWidth: 30,
-                    radius: 100
+                    endAngle: endAngle,
+                    colorStyle: 'rgba(58, 79, 142, ' + transparency + ')',
+                    borderWidth: 50,
+                    radius: 100,
+                    text: textList[i]
                 },
                 hoverable: false
             });

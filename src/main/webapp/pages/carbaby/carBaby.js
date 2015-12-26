@@ -2,9 +2,8 @@
  * jiangyukun on 2015/12/26.
  */
 +function () {
-    var zrenderPath = '../../car/js/canvas/zrender';
-    var Cellular = '../../car/js/canvas/custom/Cellular';
-    var carBabyView = '../../car/js/carbaby/carBabyView';
+    var zrenderPath = 'zrender';
+    var carBabyView = 'carBabyView';
     require.config({
         paths: {
             'zrender': zrenderPath,
