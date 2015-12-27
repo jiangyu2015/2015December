@@ -15,7 +15,7 @@
         <!-- mybatis -->
         <mybatis.version>3.2.8</mybatis.version>
         <!-- spring -->
-        <spring.version>4.2.3.RELEASE</spring.version>
+        <spring.version>4.2.2.RELEASE</spring.version>
         <spring.security.version>4.0.3.RELEASE</spring.security.version>
         <!-- mysql -->
         <mysql.version>5.1.37</mysql.version>
