@@ -657,6 +657,7 @@ var esl;
      * @return {boolean} 是否完成相应的状态
      */
     function modIs(id, state) {
+        //console.log(id + ' ' +  modModules[id]);
         return modModules[id] && modModules[id].state >= state;
     }
 

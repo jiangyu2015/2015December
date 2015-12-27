@@ -1,13 +1,16 @@
 /**
  * jiangyukun on 2015/12/26.
  */
-+function () {
++function ($) {
     var zrenderPath = 'zrender';
     var carBabyView = 'carBabyView';
+    var Sector = 'Sector';
+    var IndexSector = 'IndexSector';
+    var Index2Sector = 'Index2Sector';
     require.config({
         paths: {
             'zrender': zrenderPath,
-            'zrender/shape/Util': zrenderPath,
+            'zrender/tool/util': zrenderPath,
             'zrender/shape/Base': zrenderPath,
             'zrender/shape/Circle': zrenderPath,
             'zrender/shape/Text': zrenderPath,
@@ -15,7 +18,9 @@
             'zrender/shape/Image': zrenderPath,
             'zrender/shape/BezierCurve': zrenderPath,
 
-            'zrender/shape/Cellular': zrenderPath,
+            'Sector': Sector,
+            'IndexSector': IndexSector,
+            'Index2Sector': Index2Sector,
             'carBabyView': carBabyView
         }
     });
@@ -27,15 +32,18 @@
         'zrender/shape/Text',
         'zrender/shape/Image',
         'zrender/shape/BezierCurve',
-        'zrender/shape/Cellular',
+        'Sector',
+        'IndexSector',
+        'Index2Sector',
         'carBabyView'
     ], function (zrender) {
         var LineShape = require('zrender/shape/Line');
         var CircleShape = require('zrender/shape/Circle');
 
-        var CellularShape = require('zrender/shape/Cellular');
         var carBabyView = require('carBabyView');
-
+        var Sector = require('Sector');
+        var IndexSector = require('IndexSector');
+        var Index2Sector = require('Index2Sector');
 
         var zr = zrender.init(document.getElementById('carInfoCanvas'));
         var width = Math.ceil(zr.getWidth());
@@ -49,7 +57,9 @@
             shape: {
                 LineShape: LineShape,
                 CircleShape: CircleShape,
-                CellularShape: CellularShape
+                Sector: Sector,
+                IndexSector: IndexSector,
+                Index2Sector: Index2Sector
             },
             width: width,
             height: height,
@@ -57,4 +67,4 @@
             centerY: centerY
         });
     });
-}();
+}($);
