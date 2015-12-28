@@ -12,6 +12,7 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
         this.brushTypeOnly = 'stroke';
         this.currentIndexAngle = 0;
         this.animation1 = true;
+        this.beforeTime = -1;
         BaseSector.call(this, options);
     };
     IndexSector.prototype = {
@@ -20,17 +21,21 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
             BaseSector.prototype.buildPath.call(this, ctx, style);
 
             var i;
-            var text = style.text;
             var startAngle = 2 * PI - style.startAngle;
             var endAngle = 2 * PI - style.endAngle;
-            var middleAngle = (startAngle + endAngle) / 2;
-            var centerPosition = this.getCenterPosition(style, middleAngle);
+            var centerPosition = this.getCenterPosition(style, (style.startAngle + style.endAngle) / 2);
             var x = centerPosition.x;
             var y = centerPosition.y;
             var deltaAngle = startAngle - endAngle;
             var borderWidth = style.borderWidth;
+
             var index1Color = style.index1Color;
+            var index1Text = style.index1Text;
             var radius = style.radius + borderWidth + 5;
+            var exactMultiple = 1;
+            if (this.beforeTime != -1) {
+                exactMultiple = (+new Date() - this.beforeTime) / 100;
+            }
 
             // 开始动画
             if (this.startAnimation) {
@@ -39,7 +44,7 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
                     return;
                 }
                 var maxAngle = deltaAngle / 3;
-                var anglePer = maxAngle / 10;
+                var anglePer = maxAngle / 5;
 
                 for (i = 0; i < 4; i += 0.2) {
                     ctx.beginPath();
@@ -48,12 +53,32 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
                     ctx.stroke();
                 }
                 if (this.currentIndexAngle < maxAngle) {
-                    this.currentIndexAngle += anglePer;
+                    this.currentIndexAngle += anglePer * exactMultiple;
+                    if (this.currentIndexAngle > maxAngle) {
+                        this.currentIndexAngle = maxAngle;
+                    }
                 } else {
                     this.animation1 = false;
+                    this.showIndexText(ctx, x, y, radius, startAngle - maxAngle, index1Text, index1Color);
                 }
+                this.beforeTime = +new Date();
             }
             // 结束动画
+        },
+        showIndexText: function (ctx, x, y, textRadius, endAngle, text, color) {
+            ctx.save();
+            ctx.font = "12px Verdana";
+            var textWidth = ctx.measureText(text).width;
+            var textMiddleAngle = endAngle - asin((textWidth / 2) / textRadius);
+            var textCenterX = x + cos(textMiddleAngle) * textRadius;
+            var textCenterY = y + sin(textMiddleAngle) * textRadius;
+
+            ctx.translate(textCenterX, textCenterY);
+            ctx.rotate(PI / 2 + textMiddleAngle);
+            ctx.fillStyle = color;
+            ctx.fillText(text, -textWidth * 2 / 3, 0);
+
+            ctx.restore();
         }
     };
     util.inherits(IndexSector, BaseSector);

@@ -1,7 +1,7 @@
 /**
  * jiangyukun on 2015/12/28.
  */
-define("instrumentPanelView", ["require"], function (require) {
+define("instrumentPanelView", ["require", 'Index2Sector'], function (require) {
     var Index2Sector = require('Index2Sector');
     var PI = Math.PI, PI2 = PI * 2;
 
@@ -12,10 +12,23 @@ define("instrumentPanelView", ["require"], function (require) {
         var centerY = context.centerY;
         var shapeContainer = context.shapeContainer;
 
+        //var positionX = centerX, positionY = centerX;
         var sectors = [], sectorCount = 8, padding = 0.02;
         var angle = PI2 / 8;
         var startAngleList = [angle, angle * 2, angle * 3, angle * 4, angle * 5, angle * 6, angle * 7, 0];
-        var textList = ['油耗', '', '里程', '', '', '', '费用', ''];
+        var textList = [{
+            sectorText: '油耗',
+            index1Text: '8.8KM/L',
+            index2Text: '11.2KM/L'
+        }, null, {
+            sectorText: '里程',
+            index1Text: '4.6万公里',
+            index2Text: '6.0万公里'
+        }, null, null, null, {
+            sectorText: '费用',
+            index1Text: '2000元',
+            index2Text: '3000元'
+        }, null];
         var transparencyList = [0.38, 0.34, 0.3, 0.26, 0.22, 0.18, 0.14, 0.1];
         var timeList = [150, 300, 450, 650, 850, 1100, 1350, 1650];
         for (var i = 0; i < sectorCount; i++) {
@@ -28,11 +41,17 @@ define("instrumentPanelView", ["require"], function (require) {
             setTimeout(function () {
                 var startAngle = startAngleList[i];
                 var endAngle = startAngle + angle - padding;
+                var text = textList[i];
+                var sectorText = text ? text.sectorText : null;
+                var index1Text = text ? text.index1Text : null;
+                var index2Text = text ? text.index2Text : null;
+
                 var sector = sectors[i] = new Index2Sector({
+                    uuid: 'uuid_' + i,
                     zlevel: 0,
                     style: {
                         x: centerX,
-                        y: centerY,
+                        y: centerX,
                         startAngle: startAngle + padding,
                         endAngle: endAngle,
                         colorStyle: 'rgba(57, 79, 141, ' + transparencyList[i] + ')',
@@ -40,12 +59,14 @@ define("instrumentPanelView", ["require"], function (require) {
                         index2Color: 'rgba(236, 105, 65, 1)',
                         borderWidth: width / 8,
                         radius: width / 5,
-                        sectorText: textList[i]
+                        sectorText: sectorText,
+                        index1Text: index1Text,
+                        index2Text: index2Text
                     },
-                    hoverable: true,
+                    hoverable: false,
                     clickable: true,
                     onclick: function () {
-                        console.log(1);
+                        this.changeState(zr);
                     }
                 });
                 zr.addShape(sector);
@@ -77,7 +98,7 @@ define("instrumentPanelView", ["require"], function (require) {
                         nextSectorAnimation(i + 1, total);
                     }
                 }
-            }, 20);
+            }, 100);
         }
     }
 });

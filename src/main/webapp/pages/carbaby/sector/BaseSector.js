@@ -1,18 +1,18 @@
 /**
  * jiangyukun on 15/12/27.
  */
-
 define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
     var Base = require('zrender/shape/Base');
     var util = require('zrender/tool/util');
 
-    var PI = Math.PI;
-    var cos = Math.cos, sin = Math.sin, asin = Math.asin;
+    var PI = Math.PI, PI2 = PI * 2;
+    var cos = Math.cos, sin = Math.sin, asin = Math.asin, sqrt = Math.sqrt, atan2 = Math.atan2;
     var BaseSector = function (options) {
         this.brushTypeOnly = 'stroke';
         this.startAnimation = false;
         this.currentMoveLength = 0;
         this.maxMoveLength = 25;
+        this.sectorState = 'close';
         Base.call(this, options);
     };
     BaseSector.prototype = {
@@ -21,8 +21,7 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
             var i, j;
             var startAngle = 2 * PI - style.startAngle;
             var endAngle = 2 * PI - style.endAngle;
-            var middleAngle = (startAngle + endAngle) / 2;
-            var centerPosition = this.getCenterPosition(style, middleAngle);
+            var centerPosition = this.getCenterPosition(style, (style.startAngle + style.endAngle) / 2);
             var x = centerPosition.x;
             var y = centerPosition.y;
             var text = style.sectorText;
@@ -55,7 +54,6 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
 
             var textWidth = ctx.measureText(text).width;
             var textStartAngle = textCenterAngle - asin((textWidth / 2) / radius);
-            //console.log('startAngle ' + startAngle + ' endAngle ' + endAngle);
             for (i = 0; i < text.length; i++) {
                 ctx.save();
                 var currentTextAngle = textStartAngle;
@@ -73,43 +71,60 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
                 ctx.restore();
             }
         },
-        getRect: function (style) {
-            if (style.__rect) {
-                return style.__rect;
+        isCover: function (x, y) {
+            var style = this.style;
+            var centerPosition = this.getCenterPosition(style, (style.startAngle + style.endAngle) / 2);
+            var sectorX = centerPosition.x;
+            var sectorY = centerPosition.y;
+            var dx = x - sectorX;
+            var dy = sectorY - y;
+            var angle = atan2(dy, dx);
+            if (angle < 0) {
+                angle += PI2;
             }
-            return {
-                x: 0,
-                y: 0,
-                width: 0,
-                height: 0
-            };
+            if (angle < style.startAngle || angle > style.endAngle) {
+                return false;
+            }
+            var distance = sqrt(dx * dx + dy * dy);
+            return !(distance < style.radius || distance > style.radius + style.borderWidth);
         },
-        open: function () {
+        open: function (zr) {
             var self = this;
             var id = setInterval(function () {
                 if (self.currentMoveLength < self.maxMoveLength) {
                     self.currentMoveLength += 1;
-                    self.__dirty = true;
+                    self.modSelf();
+                    zr.refresh();
                 } else {
                     clearInterval(id);
                 }
             }, 0);
         },
-        close: function () {
+        close: function (zr) {
             var self = this;
             var id = setInterval(function () {
                 if (self.currentMoveLength > 0) {
                     self.currentMoveLength--;
-                    self.__dirty = true;
+                    self.modSelf();
+                    zr.refresh();
                 } else {
                     clearInterval(id);
                 }
             }, 0);
         },
+        changeState: function (zr) {
+            if (this.sectorState == 'close') {
+                this.sectorState = 'open';
+                this.open(zr);
+            } else {
+                this.sectorState = 'close';
+                this.close(zr);
+            }
+        },
         getCenterPosition: function (style, angle) {
             return {
                 x: style.x + this.currentMoveLength * cos(angle),
-                y: style.y + this.currentMoveLength * sin(angle)
+                y: style.y - this.currentMoveLength * sin(angle)
             };
         }
     };

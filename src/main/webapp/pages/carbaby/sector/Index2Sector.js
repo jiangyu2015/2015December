@@ -11,6 +11,7 @@ define("Index2Sector", ["require", 'Index1Sector', 'zrender/tool/util'], functio
     var Index2Sector = function (options) {
         this.currentIndex2Angle = 0;
         this.animation2 = true;
+        this.before2Time = -1;
         Index1Sector.call(this, options);
     };
     Index2Sector.prototype = {
@@ -21,14 +22,19 @@ define("Index2Sector", ["require", 'Index1Sector', 'zrender/tool/util'], functio
             var i;
             var startAngle = 2 * PI - style.startAngle;
             var endAngle = 2 * PI - style.endAngle;
-            var middleAngle = (startAngle + endAngle) / 2;
-            var centerPosition = this.getCenterPosition(style, middleAngle);
+            var centerPosition = this.getCenterPosition(style, (style.startAngle + style.endAngle) / 2);
             var x = centerPosition.x;
             var y = centerPosition.y;
             var deltaAngle = startAngle - endAngle;
             var borderWidth = style.borderWidth;
-            var index1Color = style.index2Color;
+
+            var index2Text = style.index2Text;
+            var index2Color = style.index2Color;
             var radius = style.radius + borderWidth + 15;
+            var exactMultiple = 1;
+            if (this.before2Time != -1) {
+                exactMultiple = (+new Date() - this.before2Time) / 100;
+            }
 
             // 开始动画
             if (this.startAnimation) {
@@ -37,21 +43,26 @@ define("Index2Sector", ["require", 'Index1Sector', 'zrender/tool/util'], functio
                     return;
                 }
                 var maxAngle = deltaAngle / 6;
-                var anglePer = maxAngle / 10;
+                var anglePer = maxAngle / 5;
 
                 for (i = 0; i < 4; i += 0.2) {
                     ctx.beginPath();
                     ctx.arc(x, y, radius + i, startAngle, startAngle - this.currentIndex2Angle, true);
-                    ctx.strokeStyle = index1Color;
+                    ctx.strokeStyle = index2Color;
                     ctx.stroke();
                 }
                 if (!this.animation1) {
                     if (this.currentIndex2Angle < maxAngle) {
-                        this.currentIndex2Angle += anglePer;
+                        this.currentIndex2Angle += anglePer * exactMultiple;
+                        if (this.currentIndex2Angle > maxAngle) {
+                            this.currentIndex2Angle = maxAngle;
+                        }
                     } else {
                         this.animation2 = false;
+                        this.showIndexText(ctx, x, y, radius, startAngle - maxAngle, index2Text, index2Color);
                     }
                 }
+                this.before2Time = +new Date();
             }
             // 结束动画
         }
