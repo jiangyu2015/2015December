@@ -4,6 +4,8 @@
 $(function () {
     var zrenderPath = 'lib/zrender';
     var carBabyView = 'carBabyView';
+    var instrumentPanelView = 'instrumentPanelView';
+
     var sectorBaseDir = 'sector/';
     var BaseSector = sectorBaseDir + 'BaseSector';
     var Index1Sector = sectorBaseDir + 'Index1Sector';
@@ -19,6 +21,7 @@ $(function () {
             'zrender/shape/Image': zrenderPath,
             'zrender/shape/BezierCurve': zrenderPath,
 
+            'instrumentPanelView': instrumentPanelView,
             'carBabyView': carBabyView,
             'BaseSector': BaseSector,
             'Index1Sector': Index1Sector,
@@ -65,7 +68,8 @@ $(function () {
             width: width,
             height: height,
             centerX: centerX,
-            centerY: centerY
+            centerY: centerY,
+            shapeContainer: {}
         });
     });
 });
