@@ -32,8 +32,12 @@ define("Index2Sector", ["require", 'Index1Sector', 'zrender/tool/util'], functio
 
             // 开始动画
             if (this.startAnimation) {
+                if (!style.sectorText) {
+                    this.animation2 = false;
+                    return;
+                }
                 var maxAngle = deltaAngle / 6;
-                var anglePer = maxAngle / 20;
+                var anglePer = maxAngle / 10;
 
                 for (i = 0; i < 4; i += 0.2) {
                     ctx.beginPath();
@@ -41,7 +45,7 @@ define("Index2Sector", ["require", 'Index1Sector', 'zrender/tool/util'], functio
                     ctx.strokeStyle = index1Color;
                     ctx.stroke();
                 }
-                if (!this.animation) {
+                if (!this.animation1) {
                     if (this.currentIndex2Angle < maxAngle) {
                         this.currentIndex2Angle += anglePer;
                     } else {

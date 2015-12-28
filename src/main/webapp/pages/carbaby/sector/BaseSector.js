@@ -28,6 +28,15 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
             var text = style.sectorText;
             var borderWidth = style.borderWidth;
             var colorStyle = style.colorStyle;
+            if (this.startAnimation && style.sectorText) {
+                // rgba(57, 79, 141, 0.22)
+                for (i = colorStyle.length - 1; i > 0; i--) {
+                    if (colorStyle[i] == ',') {
+                        colorStyle = colorStyle.substring(0, i) + ', 1)';
+                        break;
+                    }
+                }
+            }
             var radius = style.radius;
 
             for (j = 0; j < borderWidth; j += 0.2) {

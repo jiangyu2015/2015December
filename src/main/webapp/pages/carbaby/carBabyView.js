@@ -39,10 +39,10 @@ define("carBabyView", ["require"], function () {
 
 
         var sectors = [], sectorCount = 8;
-        var startAngle = 0;
         var angle = PI2 / 8;
-        var textList = ['', '油耗', '', '里程', '', '', '', '费用'];
-        var transparencyList = [0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15];
+        var startAngleList = [angle, angle * 2, angle * 3, angle * 4, angle * 5, angle * 6, angle * 7, 0];
+        var textList = ['油耗', '', '里程', '', '', '', '费用', ''];
+        var transparencyList = [0.38, 0.34, 0.3, 0.26, 0.22, 0.18, 0.14, 0.1];
         var timeList = [150, 300, 450, 650, 850, 1100, 1350, 1650];
         for (var i = 0; i < sectorCount; i++) {
             renderSector(i, sectorCount);
@@ -50,7 +50,7 @@ define("carBabyView", ["require"], function () {
 
         function renderSector(i, total) {
             setTimeout(function () {
-                var transparency = 1 - i * 0.12;
+                var startAngle = startAngleList[i];
                 var endAngle = startAngle + angle - padding;
                 var sector = sectors[i] = new Index2Sector({
                     zlevel: 0,
@@ -75,33 +75,35 @@ define("carBabyView", ["require"], function () {
                 startAngle += angle;
                 zr.addShape(sector);
                 if (i == total - 1) {
-                    sectorLoaded();
+                    sectorLoaded(total);
                 }
             }, timeList[i]);
         }
 
         // 指标动画
-        function sectorLoaded() {
+        function sectorLoaded(total) {
             var i;
-            for (i = 0; i < sectors.length; i++) {
-                sectors[i].startAnimation = true;
-            }
-            setInterval(function () {
-                for (i = 0; i < sectors.length; i++) {
-                    var sector = sectors[i];
-                    if (sector.animation || sector.animation2) {
-                        sector.modSelf();
-                    } else {
-                        nextSectorAnimation();
-                    }
-                }
-                zr.refresh();
-            }, 20);
+            nextSectorAnimation(0, total);
         }
 
         // 下一个指标动画
-        function nextSectorAnimation() {
-
+        function nextSectorAnimation(i, total) {
+            if (i == total) {
+                return;
+            }
+            var sector = sectors[i];
+            sector.startAnimation = true;
+            var sectorIndexAnimationId = setInterval(function () {
+                if (sector.animation1 || sector.animation2) {
+                    sector.modSelf();
+                    zr.refresh();
+                } else {
+                    clearInterval(sectorIndexAnimationId);
+                    if (i < total) {
+                        nextSectorAnimation(i + 1, total);
+                    }
+                }
+            }, 20);
         }
 
         shapeContainer.sectors = sectors;

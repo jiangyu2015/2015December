@@ -11,7 +11,7 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
     var IndexSector = function (options) {
         this.brushTypeOnly = 'stroke';
         this.currentIndexAngle = 0;
-        this.animation = true;
+        this.animation1 = true;
         BaseSector.call(this, options);
     };
     IndexSector.prototype = {
@@ -34,8 +34,12 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
 
             // 开始动画
             if (this.startAnimation) {
+                if (!style.sectorText) {
+                    this.animation1 = false;
+                    return;
+                }
                 var maxAngle = deltaAngle / 3;
-                var anglePer = maxAngle / 20;
+                var anglePer = maxAngle / 10;
 
                 for (i = 0; i < 4; i += 0.2) {
                     ctx.beginPath();
@@ -46,7 +50,7 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
                 if (this.currentIndexAngle < maxAngle) {
                     this.currentIndexAngle += anglePer;
                 } else {
-                    this.animation = false;
+                    this.animation1 = false;
                 }
             }
             // 结束动画

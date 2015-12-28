@@ -2,7 +2,7 @@
  * jiangyukun on 2015/12/26.
  */
 $(function () {
-    var zrenderPath = 'zrender';
+    var zrenderPath = 'lib/zrender';
     var carBabyView = 'carBabyView';
     var sectorBaseDir = 'sector/';
     var BaseSector = sectorBaseDir + 'BaseSector';
@@ -19,10 +19,10 @@ $(function () {
             'zrender/shape/Image': zrenderPath,
             'zrender/shape/BezierCurve': zrenderPath,
 
+            'carBabyView': carBabyView,
             'BaseSector': BaseSector,
             'Index1Sector': Index1Sector,
-            'Index2Sector': Index2Sector,
-            'carBabyView': carBabyView
+            'Index2Sector': Index2Sector
         }
     });
 
