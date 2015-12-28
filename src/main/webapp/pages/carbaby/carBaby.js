@@ -31,11 +31,7 @@ $(function () {
         }
     });
 
-    require([
-        'zrender',
-        'carBabyView'
-    ], function (zrender) {
-        var carBabyView = require('carBabyView');
+    require(['zrender', 'carBabyView'], function (zrender, carBabyView) {
         var zr = zrender.init(document.getElementById('carInfoCanvas'));
         var width = Math.ceil(zr.getWidth());
         var height = Math.ceil(zr.getHeight());

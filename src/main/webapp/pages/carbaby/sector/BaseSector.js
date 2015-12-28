@@ -11,7 +11,7 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
         this.brushTypeOnly = 'stroke';
         this.startAnimation = false;
         this.currentMoveLength = 0;
-        this.maxMoveLength = 25;
+        this.maxMoveLength = 10;
         this.sectorState = 'close';
         Base.call(this, options);
     };
@@ -92,25 +92,25 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
             var self = this;
             var id = setInterval(function () {
                 if (self.currentMoveLength < self.maxMoveLength) {
-                    self.currentMoveLength += 1;
+                    self.currentMoveLength += 2;
                     self.modSelf();
                     zr.refresh();
                 } else {
                     clearInterval(id);
                 }
-            }, 0);
+            }, 100);
         },
         close: function (zr) {
             var self = this;
             var id = setInterval(function () {
                 if (self.currentMoveLength > 0) {
-                    self.currentMoveLength--;
+                    self.currentMoveLength -= 2;
                     self.modSelf();
                     zr.refresh();
                 } else {
                     clearInterval(id);
                 }
-            }, 0);
+            }, 100);
         },
         changeState: function (zr) {
             if (this.sectorState == 'close') {
