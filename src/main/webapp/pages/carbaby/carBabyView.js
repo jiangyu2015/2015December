@@ -6,7 +6,7 @@ define("carBabyView", ["require"], function () {
         var zr = context.zr;
         var CircleShape = context.shape.CircleShape;
         var Sector = context.shape.Sector;
-        var IndexSector = context.shape.IndexSector;
+        var Index1Sector = context.shape.Index1Sector;
         var Index2Sector = context.shape.Index2Sector;
 
         var PI = Math.PI, PI2 = PI * 2;
@@ -38,15 +38,17 @@ define("carBabyView", ["require"], function () {
          zr.addShape(circle);*/
 
 
-        var sectors = [];
+        var sectors = [], sectorCount = 8;
         var startAngle = 0;
         var angle = PI2 / 8;
         var textList = ['', '油耗', '', '里程', '', '', '', '费用'];
-        for (var i = 0; i < 8; i++) {
-            renderSector(i);
+        var transparencyList = [0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15];
+        var timeList = [150, 300, 450, 650, 850, 1100, 1350, 1650];
+        for (var i = 0; i < sectorCount; i++) {
+            renderSector(i, sectorCount);
         }
 
-        function renderSector(i) {
+        function renderSector(i, total) {
             setTimeout(function () {
                 var transparency = 1 - i * 0.12;
                 var endAngle = startAngle + angle - padding;
@@ -57,12 +59,12 @@ define("carBabyView", ["require"], function () {
                         y: centerY,
                         startAngle: startAngle + padding,
                         endAngle: endAngle,
-                        colorStyle: 'rgba(58, 79, 142, ' + transparency + ')',
-                        index1Color: 'rgba(0, 255, 0, 1)',
-                        index2Color: 'rgba(255, 0, 0, 1)',
+                        colorStyle: 'rgba(57, 79, 141, ' + transparencyList[i] + ')',
+                        index1Color: 'rgba(0, 190, 113, 1)',
+                        index2Color: 'rgba(236, 105, 65, 1)',
                         borderWidth: width / 8,
                         radius: width / 5,
-                        text: textList[i]
+                        sectorText: textList[i]
                     },
                     hoverable: true,
                     clickable: true,
@@ -72,21 +74,39 @@ define("carBabyView", ["require"], function () {
                 });
                 startAngle += angle;
                 zr.addShape(sector);
-            }, i * 500);
+                if (i == total - 1) {
+                    sectorLoaded();
+                }
+            }, timeList[i]);
+        }
+
+        // 指标动画
+        function sectorLoaded() {
+            var i;
+            for (i = 0; i < sectors.length; i++) {
+                sectors[i].startAnimation = true;
+            }
+            setInterval(function () {
+                for (i = 0; i < sectors.length; i++) {
+                    var sector = sectors[i];
+                    if (sector.animation || sector.animation2) {
+                        sector.modSelf();
+                    } else {
+                        nextSectorAnimation();
+                    }
+                }
+                zr.refresh();
+            }, 20);
+        }
+
+        // 下一个指标动画
+        function nextSectorAnimation() {
+
         }
 
         shapeContainer.sectors = sectors;
         zr.render();
-        //console.log(zr);
-        setInterval(function () {
-            for (var i = 0; i < sectors.length; i++) {
-                var sector = sectors[i];
-                if (sector.animation || sector.animation2) {
-                    sector.__dirty = true;
-                }
-            }
-            zr.refresh();
-        }, 20);
+
         $('#testBtn').click(function () {
             sectors[0].open();
         });

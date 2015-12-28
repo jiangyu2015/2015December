@@ -1,8 +1,8 @@
 /**
  * jiangyukun on 15/12/27.
  */
-define("IndexSector", ["require", 'Sector', 'zrender/tool/util'], function (require) {
-    var Sector = require('Sector');
+define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function (require) {
+    var BaseSector = require('BaseSector');
     var util = require('zrender/tool/util');
 
     var PI = Math.PI;
@@ -12,12 +12,12 @@ define("IndexSector", ["require", 'Sector', 'zrender/tool/util'], function (requ
         this.brushTypeOnly = 'stroke';
         this.currentIndexAngle = 0;
         this.animation = true;
-        Sector.call(this, options);
+        BaseSector.call(this, options);
     };
     IndexSector.prototype = {
         type: 'index_sector',
         buildPath: function (ctx, style) {
-            Sector.prototype.buildPath.call(this, ctx, style);
+            BaseSector.prototype.buildPath.call(this, ctx, style);
 
             var i;
             var text = style.text;
@@ -32,22 +32,26 @@ define("IndexSector", ["require", 'Sector', 'zrender/tool/util'], function (requ
             var index1Color = style.index1Color;
             var radius = style.radius + borderWidth + 5;
 
-            var maxAngle = deltaAngle / 3;
-            var anglePer = maxAngle / 20;
+            // 开始动画
+            if (this.startAnimation) {
+                var maxAngle = deltaAngle / 3;
+                var anglePer = maxAngle / 20;
 
-            for (i = 0; i < 4; i += 0.2) {
-                ctx.beginPath();
-                ctx.arc(x, y, radius + i, startAngle, startAngle - this.currentIndexAngle, true);
-                ctx.strokeStyle = index1Color;
-                ctx.stroke();
+                for (i = 0; i < 4; i += 0.2) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius + i, startAngle, startAngle - this.currentIndexAngle, true);
+                    ctx.strokeStyle = index1Color;
+                    ctx.stroke();
+                }
+                if (this.currentIndexAngle < maxAngle) {
+                    this.currentIndexAngle += anglePer;
+                } else {
+                    this.animation = false;
+                }
             }
-            if (this.currentIndexAngle < maxAngle) {
-                this.currentIndexAngle += anglePer;
-            } else {
-                this.animation = false;
-            }
+            // 结束动画
         }
     };
-    util.inherits(IndexSector, Sector);
+    util.inherits(IndexSector, BaseSector);
     return IndexSector;
 });

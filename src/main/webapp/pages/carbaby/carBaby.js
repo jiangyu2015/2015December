@@ -1,12 +1,13 @@
 /**
  * jiangyukun on 2015/12/26.
  */
-+function ($) {
+$(function () {
     var zrenderPath = 'zrender';
     var carBabyView = 'carBabyView';
-    var Sector = 'Sector';
-    var IndexSector = 'IndexSector';
-    var Index2Sector = 'Index2Sector';
+    var sectorBaseDir = 'sector/';
+    var BaseSector = sectorBaseDir + 'BaseSector';
+    var Index1Sector = sectorBaseDir + 'Index1Sector';
+    var Index2Sector = sectorBaseDir + 'Index2Sector';
     require.config({
         paths: {
             'zrender': zrenderPath,
@@ -18,8 +19,8 @@
             'zrender/shape/Image': zrenderPath,
             'zrender/shape/BezierCurve': zrenderPath,
 
-            'Sector': Sector,
-            'IndexSector': IndexSector,
+            'BaseSector': BaseSector,
+            'Index1Sector': Index1Sector,
             'Index2Sector': Index2Sector,
             'carBabyView': carBabyView
         }
@@ -32,8 +33,8 @@
         'zrender/shape/Text',
         'zrender/shape/Image',
         'zrender/shape/BezierCurve',
-        'Sector',
-        'IndexSector',
+        'BaseSector',
+        'Index1Sector',
         'Index2Sector',
         'carBabyView'
     ], function (zrender) {
@@ -41,8 +42,8 @@
         var CircleShape = require('zrender/shape/Circle');
 
         var carBabyView = require('carBabyView');
-        var Sector = require('Sector');
-        var IndexSector = require('IndexSector');
+        var BaseSector = require('BaseSector');
+        var Index1Sector = require('Index1Sector');
         var Index2Sector = require('Index2Sector');
 
         var zr = zrender.init(document.getElementById('carInfoCanvas'));
@@ -57,8 +58,8 @@
             shape: {
                 LineShape: LineShape,
                 CircleShape: CircleShape,
-                Sector: Sector,
-                IndexSector: IndexSector,
+                BaseSector: BaseSector,
+                Index1Sector: Index1Sector,
                 Index2Sector: Index2Sector
             },
             width: width,
@@ -67,4 +68,4 @@
             centerY: centerY
         });
     });
-}($);
+});

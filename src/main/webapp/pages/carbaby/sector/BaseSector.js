@@ -2,20 +2,21 @@
  * jiangyukun on 15/12/27.
  */
 
-define("Sector", ["require", 'zrender/tool/util'], function (require) {
+define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
     var Base = require('zrender/shape/Base');
     var util = require('zrender/tool/util');
 
     var PI = Math.PI;
     var cos = Math.cos, sin = Math.sin, asin = Math.asin;
-    var Sector = function (options) {
+    var BaseSector = function (options) {
         this.brushTypeOnly = 'stroke';
+        this.startAnimation = false;
         this.currentMoveLength = 0;
         this.maxMoveLength = 25;
         Base.call(this, options);
     };
-    Sector.prototype = {
-        type: 'sector',
+    BaseSector.prototype = {
+        type: 'base_sector',
         buildPath: function (ctx, style) {
             var i, j;
             var startAngle = 2 * PI - style.startAngle;
@@ -24,7 +25,7 @@ define("Sector", ["require", 'zrender/tool/util'], function (require) {
             var centerPosition = this.getCenterPosition(style, middleAngle);
             var x = centerPosition.x;
             var y = centerPosition.y;
-            var text = style.text;
+            var text = style.sectorText;
             var borderWidth = style.borderWidth;
             var colorStyle = style.colorStyle;
             var radius = style.radius;
@@ -103,6 +104,6 @@ define("Sector", ["require", 'zrender/tool/util'], function (require) {
             };
         }
     };
-    util.inherits(Sector, Base);
-    return Sector;
+    util.inherits(BaseSector, Base);
+    return BaseSector;
 });
