@@ -4,6 +4,7 @@
 $(function () {
     var zrenderPath = 'lib/zrender-original';
     var carBabyView = 'carBabyView';
+    var beginAnimationView = 'beginAnimationView';
     var topTipView = 'topTipView';
     var instrumentPanelView = 'instrumentPanelView';
 
@@ -11,6 +12,7 @@ $(function () {
     var BaseSector = sectorBaseDir + 'BaseSector';
     var Index1Sector = sectorBaseDir + 'Index1Sector';
     var Index2Sector = sectorBaseDir + 'Index2Sector';
+    var utils = 'utils';
     require.config({
         paths: {
             'zrender': zrenderPath,
@@ -21,13 +23,16 @@ $(function () {
             'zrender/shape/Line': zrenderPath,
             'zrender/shape/Image': zrenderPath,
             'zrender/shape/BezierCurve': zrenderPath,
+            'zrender/Group': zrenderPath,
 
+            'beginAnimationView': beginAnimationView,
             'topTipView': topTipView,
             'instrumentPanelView': instrumentPanelView,
             'carBabyView': carBabyView,
             'BaseSector': BaseSector,
             'Index1Sector': Index1Sector,
-            'Index2Sector': Index2Sector
+            'Index2Sector': Index2Sector,
+            'utils': utils
         }
     });
 

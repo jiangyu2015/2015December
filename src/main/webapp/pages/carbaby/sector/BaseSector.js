@@ -38,7 +38,7 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
             }
             var radius = style.radius;
 
-            for (j = 0; j < borderWidth; j += 0.2) {
+            for (j = 0; j < borderWidth; j += 1) {
                 ctx.beginPath();
                 ctx.arc(x, y, radius + j, startAngle, endAngle, true);
                 ctx.strokeStyle = colorStyle;

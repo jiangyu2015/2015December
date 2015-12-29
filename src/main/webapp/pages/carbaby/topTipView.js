@@ -19,11 +19,7 @@ define("topTipView", ['require', 'zrender/shape/Circle', 'zrender/shape/Text'], 
                 brushType: 'fill',
                 color: baseColor1
             },
-            hoverable: false,
-            clickable: true,
-            onclick: function () {
-                console.log(1);
-            }
+            hoverable: false
         });
 
         var averageValueText = new TextShape({

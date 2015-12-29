@@ -46,7 +46,7 @@ define("Index1Sector", ["require", 'BaseSector', 'zrender/tool/util'], function 
                 var maxAngle = deltaAngle / 3;
                 var anglePer = maxAngle / 5;
 
-                for (i = 0; i < 4; i += 0.2) {
+                for (i = 0; i < 4; i += 0.4) {
                     ctx.beginPath();
                     ctx.arc(x, y, radius + i, startAngle, startAngle - this.currentIndexAngle, true);
                     ctx.strokeStyle = index1Color;

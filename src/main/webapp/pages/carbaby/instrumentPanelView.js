@@ -1,10 +1,9 @@
 /**
  * jiangyukun on 2015/12/28.
  */
-define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/Circle', 'Index2Sector'], function (require) {
-    var ImageShape = require('zrender/shape/Image');
-    var CircleShape = require('zrender/shape/Circle');
+define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/Circle', 'Index2Sector', 'utils'], function (require) {
     var Index2Sector = require('Index2Sector');
+    var utils = require('utils');
     var PI = Math.PI, PI2 = PI * 2;
 
     return function (context) {
@@ -14,110 +13,6 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
         var centerY = context.centerX;
         var shapeContainer = context.shapeContainer;
 
-
-        // 雷达
-        var radarRadius = width / 5;
-        var radarTen = new ImageShape({
-            zlevel: 1,
-            style: {
-                x: centerX - radarRadius,
-                y: centerY - radarRadius,
-                width: 2 * radarRadius,
-                height: 2 * radarRadius,
-                image: 'images/radar-ten.png'
-            },
-            clipShape: new CircleShape({
-                style: {
-                    x: centerX,
-                    y: centerY,
-                    r: radarRadius
-                }
-            })
-        });
-        zr.addShape(radarTen);
-
-        var radar = new ImageShape({
-            zlevel: 0,
-            style: {
-                x: centerX - radarRadius,
-                y: centerY - radarRadius,
-                width: 2 * radarRadius,
-                height: 2 * radarRadius,
-                image: 'images/radar.png'
-            },
-            clipShape: new CircleShape({
-                style: {
-                    x: centerX,
-                    y: centerY,
-                    r: radarRadius
-                }
-            })
-        });
-        zr.addShape(radar);
-
-        var dotRadius = 7;
-        var dot1PositionX = centerX - 40;
-        var dot1PositionY = centerY - 40;
-        var radarDot1 = new ImageShape({
-            zlevel: 3,
-            style: {
-                x: dot1PositionX - dotRadius,
-                y: dot1PositionY - dotRadius,
-                width: 2 * dotRadius,
-                height: 2 * dotRadius,
-                image: 'images/dot-1.png'
-            },
-            clipShape: new CircleShape({
-                style: {
-                    x: dot1PositionX,
-                    y: dot1PositionY,
-                    r: dotRadius
-                }
-            })
-        });
-        zr.addShape(radarDot1);
-
-        var dot2PositionX = centerX + 30;
-        var dot2PositionY = centerY - 40;
-        var radarDot2 = new ImageShape({
-            zlevel: 3,
-            style: {
-                x: dot2PositionX - dotRadius,
-                y: dot2PositionY - dotRadius,
-                width: 2 * dotRadius,
-                height: 2 * dotRadius,
-                image: 'images/dot-2.png'
-            },
-            clipShape: new CircleShape({
-                style: {
-                    x: dot2PositionX,
-                    y: dot2PositionY,
-                    r: dotRadius
-                }
-            })
-        });
-        zr.addShape(radarDot2);
-
-        var dot3PositionX = centerX + 30;
-        var dot3PositionY = centerY - 15;
-        var radarDot3 = new ImageShape({
-            zlevel: 3,
-            style: {
-                x: dot3PositionX - dotRadius,
-                y: dot3PositionY - dotRadius,
-                width: 2 * dotRadius,
-                height: 2 * dotRadius,
-                image: 'images/dot-3.png'
-            },
-            clipShape: new CircleShape({
-                style: {
-                    x: dot3PositionX,
-                    y: dot3PositionY,
-                    r: dotRadius
-                }
-            })
-        });
-        zr.addShape(radarDot3);
 
         // 指示盘
         var sectors = [], sectorCount = 8, padding = 0.02;
@@ -142,7 +37,6 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
             renderSector(i, sectorCount);
         }
 
-        shapeContainer.radarTen = radarTen;
         shapeContainer.instrumentPanel = sectors;
 
         function renderSector(i, total) {
