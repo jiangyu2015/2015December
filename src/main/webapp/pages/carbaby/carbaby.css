@@ -4,10 +4,15 @@
     box-sizing: border-box;
 }
 
-#carInfoCanvas {
-    height: 400px;
+html {
+    background: #eee;
 }
 
+#carInfoCanvas {
+    background: #fff;
+    height: 400px;
+    border-bottom: 1px solid #aaa;
+}
 
 #testBtn {
     padding: 10px 15px;

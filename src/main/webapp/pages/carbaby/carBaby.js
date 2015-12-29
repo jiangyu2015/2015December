@@ -6,6 +6,7 @@ $(function () {
     var carBabyView = 'carBabyView';
     var beginAnimationView = 'beginAnimationView';
     var topTipView = 'topTipView';
+    var bottomInfoView = 'bottomInfoView';
     var instrumentPanelView = 'instrumentPanelView';
 
     var sectorBaseDir = 'sector/';
@@ -17,16 +18,18 @@ $(function () {
         paths: {
             'zrender': zrenderPath,
             'zrender/tool/util': zrenderPath,
+            'zrender/tool/area': zrenderPath,
             'zrender/shape/Base': zrenderPath,
             'zrender/shape/Circle': zrenderPath,
             'zrender/shape/Text': zrenderPath,
             'zrender/shape/Line': zrenderPath,
             'zrender/shape/Image': zrenderPath,
-            'zrender/shape/BezierCurve': zrenderPath,
+            'zrender/shape/Rectangle': zrenderPath,
             'zrender/Group': zrenderPath,
 
             'beginAnimationView': beginAnimationView,
             'topTipView': topTipView,
+            'bottomInfoView': bottomInfoView,
             'instrumentPanelView': instrumentPanelView,
             'carBabyView': carBabyView,
             'BaseSector': BaseSector,
@@ -38,11 +41,12 @@ $(function () {
 
     require(['zrender', 'carBabyView'], function (zrender, carBabyView) {
         var zr = zrender.init(document.getElementById('carInfoCanvas'));
+        console.log(zr);
         var width = Math.ceil(zr.getWidth());
         var height = Math.ceil(zr.getHeight());
 
         var centerX = width / 2;
-        var centerY = height / 2;
+        var centerY = centerX;
         carBabyView({
             zr: zr,
             width: width,
@@ -52,7 +56,8 @@ $(function () {
             shapeContainer: {},
             color: {
                 baseColor1: 'rgba(0, 190, 113, 1)',
-                baseColor2: 'rgba(236, 105, 65, 1)'
+                baseColor2: 'rgba(236, 105, 65, 1)',
+                baseColor3: 'rgba(57, 79, 141, 1)'
             }
         });
     });

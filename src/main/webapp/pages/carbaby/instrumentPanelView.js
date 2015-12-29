@@ -1,18 +1,17 @@
 /**
  * jiangyukun on 2015/12/28.
  */
-define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/Circle', 'Index2Sector', 'utils'], function (require) {
+define("instrumentPanelView", ["require", 'Index2Sector', 'utils'], function (require) {
     var Index2Sector = require('Index2Sector');
     var utils = require('utils');
     var PI = Math.PI, PI2 = PI * 2;
 
-    return function (context) {
+    return function (context, panelChangeCallback) {
         var zr = context.zr;
         var width = context.width;
         var centerX = context.centerX;
-        var centerY = context.centerX;
+        var centerY = context.centerY;
         var shapeContainer = context.shapeContainer;
-
 
         // 指示盘
         var sectors = [], sectorCount = 8, padding = 0.02;
@@ -31,7 +30,7 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
             index1Text: '2000元',
             index2Text: '3000元'
         }, null];
-        var transparencyList = [0.38, 0.34, 0.3, 0.26, 0.22, 0.18, 0.14, 0.1];
+        var transparencyList = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
         var timeList = [150, 300, 450, 650, 850, 1100, 1350, 1650];
         for (var i = 0; i < sectorCount; i++) {
             renderSector(i, sectorCount);
@@ -50,7 +49,7 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
 
                 var sector = sectors[i] = new Index2Sector({
                     uuid: 'uuid_' + i,
-                    zlevel: 2,
+                    zlevel: i,
                     style: {
                         x: centerX,
                         y: centerY,
@@ -60,7 +59,7 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
                         index1Color: 'rgba(0, 190, 113, 1)',
                         index2Color: 'rgba(236, 105, 65, 1)',
                         borderWidth: width / 8,
-                        radius: width / 5,
+                        radius: width / 4,
                         sectorText: sectorText,
                         index1Text: index1Text,
                         index2Text: index2Text
@@ -72,6 +71,9 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
                     }
                 });
                 zr.addShape(sector);
+                sector.bind('close', PanelClose);
+                sector.bind('open', PanelStartOpen);
+                sector.bind('opened', PanelOpened);
                 if (i == total - 1) {
                     sectorLoaded(total);
                 }
@@ -101,6 +103,23 @@ define("instrumentPanelView", ["require", 'zrender/shape/Image', 'zrender/shape/
                     }
                 }
             }, 100);
+        }
+
+        function PanelClose(currentClosePanel) {
+            panelChangeCallback('close', currentClosePanel);
+        }
+
+        function PanelOpened(currentOpenedPanel) {
+            panelChangeCallback('opened', currentOpenedPanel);
+        }
+
+        function PanelStartOpen(currentOpenPanel) {
+            for (var i = 0; i < sectors.length; i++) {
+                var sector = sectors[i];
+                if (sector != currentOpenPanel) {
+                    sector.close(zr);
+                }
+            }
         }
     }
 });

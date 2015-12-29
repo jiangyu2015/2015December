@@ -22,9 +22,56 @@ define("utils", [], function () {
                     style: {
                         x: x,
                         y: y,
-                        r: (rX + rY) / 2
+                        r: rX
                     }
                 })
+            });
+        },
+        getTextShape: function (TextShape, x, y, text, color, fontSize) {
+            return new TextShape({
+                style: {
+                    x: x,
+                    y: y,
+                    text: text,
+                    color: color,
+                    textFont: 'normal ' + fontSize + 'px verdana',
+                    textBaseline: 'middle'
+                },
+                hoverable: false
+            });
+        },
+        getLineShape: function (LineShape, x, y, xEnd, yEnd, color, lineWidth, zlevel) {
+            return new LineShape({
+                zlevel: zlevel || 0,
+                style: {
+                    xStart: x,
+                    yStart: y,
+                    xEnd: xEnd,
+                    yEnd: yEnd,
+                    strokeColor: color,
+                    lineWidth: lineWidth || 1
+                },
+                hoverable: false
+            });
+        },
+        getRectShape: function (RectShape, x, y, width, height, radius, color, strokeColor, lineWidth, text) {
+            return new RectShape({
+                style: {
+                    x: x,
+                    y: y,
+                    width: width,
+                    height: height,
+                    radius: radius,
+                    brushType: 'both',
+                    color: color,
+                    strokeColor: strokeColor,
+                    lineWidth: lineWidth,
+                    lineJoin: 'round',
+                    text: text,
+                    textColor: '#fff',
+                    textPosition: 'inside',
+                    textFont: 'normal 20px verdana'
+                }
             });
         }
     };

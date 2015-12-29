@@ -10,6 +10,16 @@
 <div id="carInfoCanvas"></div>
 </body>
 <script src="../../res/js/jquery.js"></script>
+<script>
+    +function adaptHeight() {
+        var $carInfoCanvas = $('#carInfoCanvas');
+        var width = $carInfoCanvas.width();
+        console.log();
+        var height = width + 50;
+        $carInfoCanvas.css('height', height);
+    }();
+
+</script>
 <script src="lib/esl.source.js"></script>
 <script src="carBaby.js"></script>
 </html>

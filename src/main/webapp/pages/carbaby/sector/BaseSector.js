@@ -38,7 +38,7 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
             }
             var radius = style.radius;
 
-            for (j = 0; j < borderWidth; j += 1) {
+            for (j = 0; j < borderWidth; j += 0.75) {
                 ctx.beginPath();
                 ctx.arc(x, y, radius + j, startAngle, endAngle, true);
                 ctx.strokeStyle = colorStyle;
@@ -89,6 +89,11 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
             return !(distance < style.radius || distance > style.radius + style.borderWidth);
         },
         open: function (zr) {
+            if (this.sectorState == 'open') {
+                return;
+            }
+            this.dispatch('open', this);
+            this.processing = true;
             var self = this;
             var id = setInterval(function () {
                 if (self.currentMoveLength < self.maxMoveLength) {
@@ -96,11 +101,18 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
                     self.modSelf();
                     zr.refresh();
                 } else {
+                    self.processing = false;
+                    self.sectorState = 'open';
+                    self.dispatch('opened', self);
                     clearInterval(id);
                 }
             }, 100);
         },
         close: function (zr) {
+            if (this.sectorState == 'close') {
+                return;
+            }
+            this.processing = true;
             var self = this;
             var id = setInterval(function () {
                 if (self.currentMoveLength > 0) {
@@ -108,17 +120,23 @@ define("BaseSector", ["require", 'zrender/tool/util'], function (require) {
                     self.modSelf();
                     zr.refresh();
                 } else {
+                    self.processing = false;
+                    self.sectorState = 'close';
+                    self.dispatch('close', self);
                     clearInterval(id);
                 }
             }, 100);
         },
         changeState: function (zr) {
+            if (!this.style.sectorText || this.processing) {
+                return;
+            }
             if (this.sectorState == 'close') {
-                this.sectorState = 'open';
                 this.open(zr);
+                this.sectorState = 'open';
             } else {
-                this.sectorState = 'close';
                 this.close(zr);
+                this.sectorState = 'close';
             }
         },
         getCenterPosition: function (style, angle) {
